@@ -1,6 +1,10 @@
 import psycopg2
 import logging
 
+from dotenv import load_dotenv
+
+from helper.database_connector import get_db_params_from_env
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -12,14 +16,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+load_dotenv()
+
 # Database connection parameters - update these with your actual database credentials
-DB_PARAMS = {
-    "dbname": "ycv2",
-    "user": "postgres",
-    "password": "shobhi_2022",
-    "host": "localhost",
-    "port": "5432"
-}
+
+DB_PARAMS = get_db_params_from_env()
 
 
 def _get_or_create_batch(cursor, batch_name, batch_link):

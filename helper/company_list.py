@@ -1,7 +1,6 @@
 import selenium
 from selenium.webdriver.common.by import By
 from selenium import webdriver
-import json
 import time
 
 def _initialize_driver():

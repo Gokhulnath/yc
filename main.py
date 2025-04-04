@@ -15,6 +15,10 @@ def get_all_batch_based_companies():
         }
         insert_data(batch_data)
 
+def get_all_companies_html():
+    return 0
+
+
 
 def main():
     try:
