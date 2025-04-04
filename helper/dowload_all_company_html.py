@@ -1,25 +1,13 @@
 import requests
 import os
 import psycopg2
-import re
-from urllib.parse import urlparse
 import time
+from dotenv import load_dotenv
+from helper.database_connector import get_db_params_from_env
 
 
-def sanitize_filename(url):
-    """Convert a URL into a valid filename"""
-    # Get domain name as base of filename
-    parsed = urlparse(url)
-    domain = parsed.netloc
-
-    # Remove invalid filename characters and replace with underscores
-    sanitized = re.sub(r'[\\/*?:"<>|]', "_", domain)
-
-    return f"{sanitized}.html"
-
-
-def download_and_save_html(url, output_dir="downloaded_html"):
-    """Download HTML from URL and save to file"""
+def download_and_save_html(url, company_id, output_dir="downloaded_html"):
+    """Download HTML from URL and save to file using company ID as filename"""
     try:
         # Add http:// if not present
         if not url.startswith(('http://', 'https://')):
@@ -37,8 +25,8 @@ def download_and_save_html(url, output_dir="downloaded_html"):
             if not os.path.exists(output_dir):
                 os.makedirs(output_dir)
 
-            # Generate filename from URL
-            filename = sanitize_filename(url)
+            # Use company ID as filename
+            filename = f"{company_id}.html"
             filepath = os.path.join(output_dir, filename)
 
             # Save HTML content
@@ -56,12 +44,14 @@ def download_and_save_html(url, output_dir="downloaded_html"):
         print(f"Error downloading {url}: {str(e)}")
         return False
 
-
-def process_companies_table(db_params, table_name="companies"):
+def process_companies_table(table_name="companies"):
     """Process all URLs in the companies table"""
     conn = None
 
     try:
+        # Get database parameters from environment variables
+        db_params = get_db_params_from_env()
+
         # Connect to PostgreSQL database
         conn = psycopg2.connect(**db_params)
         cursor = conn.cursor()
@@ -88,7 +78,7 @@ def process_companies_table(db_params, table_name="companies"):
                 # Add delay to avoid rate limiting
                 time.sleep(1)
 
-                if download_and_save_html(link):
+                if download_and_save_html(link, row_id):
                     success_count += 1
                 else:
                     error_count += 1
@@ -107,18 +97,15 @@ def process_companies_table(db_params, table_name="companies"):
             conn.close()
 
 
-if __name__ == "__main__":
+def get_all_companies_html():
     # PostgreSQL connection parameters - adjust these for your environment
-    db_params = {
-        'host': 'localhost',
-        'database': 'company_database',
-        'user': 'postgres',
-        'password': 'your_password',
-        'port': '5432'
-    }
+    load_dotenv()
+    db_params = get_db_params_from_env()
 
+    # Get table name and output directory from environment or use defaults
     companies_table = "companies"
+    output_directory = "downloaded_html"
 
     print(f"Starting to download HTML from links in {companies_table} table")
-    process_companies_table(db_params, companies_table)
+    process_companies_table(companies_table)
     print("Processing complete")

@@ -1,4 +1,5 @@
 from helper.company_list import *
+from helper.dowload_all_company_html import get_all_companies_html
 from helper.insert_company_list import *
 
 def get_all_batch_based_companies():
@@ -15,14 +16,11 @@ def get_all_batch_based_companies():
         }
         insert_data(batch_data)
 
-def get_all_companies_html():
-    return 0
-
-
 
 def main():
     try:
         # get_all_batch_based_companies()
+        get_all_companies_html()
         print("If you see this message, the application is fucking working fine")
     except Exception as e:
         print(e)
