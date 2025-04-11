@@ -16,11 +16,24 @@ def get_all_batch_based_companies():
         }
         insert_data(batch_data)
 
+def update_recent_batch_based_companies():
+    batches = ["X25"]
+    for batch in batches:
+        url = f'https://www.ycombinator.com/companies?batch={batch}'  # Replace with your URL
+        companies = initiate_extraction(url)
+        batch_data = {
+            "batch": batch,
+            "batch_link": url,
+            "companies": companies
+        }
+        insert_data(batch_data)
+
 
 def main():
     try:
         # get_all_batch_based_companies()
         # get_all_companies_html()
+        # update_recent_batch_based_companies()
         print("If you see this message, the application is fucking working fine")
     except Exception as e:
         print(e)

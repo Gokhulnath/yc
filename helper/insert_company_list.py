@@ -94,46 +94,76 @@ def _get_or_create_industry(cursor, industry_name, industry_link):
 
 def _insert_company(cursor, company_data, batch_id):
     """
-    Insert company data and associate it with industries
+    Check if company exists, insert if not, and associate it with industries
     """
     try:
-        # Insert company
+        # Check if company already exists
         cursor.execute(
             """
-            INSERT INTO companies 
-            (logo, company_name, link, location, short_description, batch_id)
-            VALUES (%s, %s, %s, %s, %s, %s)
-            RETURNING id
+            SELECT id FROM companies 
+            WHERE company_name = %s
             """,
-            (
-                company_data['logo'],
-                company_data['company_name'],
-                company_data['link'],
-                company_data['location'],
-                company_data['short_description'],
-                batch_id
-            )
+            (company_data['company_name'],)
         )
-        company_id = cursor.fetchone()[0]
-        logger.info(f"Inserted company '{company_data['company_name']}' with ID: {company_id}")
+
+        result = cursor.fetchone()
+
+        if result:
+            # Company already exists
+            company_id = result[0]
+            logger.info(f"Company '{company_data['company_name']}' already exists with ID: {company_id}")
+        else:
+            # Insert new company
+            cursor.execute(
+                """
+                INSERT INTO companies 
+                (logo, company_name, link, location, short_description, batch_id)
+                VALUES (%s, %s, %s, %s, %s, %s)
+                RETURNING id
+                """,
+                (
+                    company_data['logo'],
+                    company_data['company_name'],
+                    company_data['link'],
+                    company_data['location'],
+                    company_data['short_description'],
+                    batch_id
+                )
+            )
+            company_id = cursor.fetchone()[0]
+            logger.info(f"Inserted new company '{company_data['company_name']}' with ID: {company_id}")
 
         # Process industries
         for ind in company_data['industry']:
             industry_id = _get_or_create_industry(cursor, ind['type'], ind['link'])
 
-            # Associate company with industry
+            # Check if this association already exists
             cursor.execute(
                 """
-                INSERT INTO company_industries (company_id, industry_id)
-                VALUES (%s, %s)
+                SELECT 1 FROM company_industries 
+                WHERE company_id = %s AND industry_id = %s
                 """,
                 (company_id, industry_id)
             )
-            logger.debug(f"Associated company '{company_data['company_name']}' with industry '{ind['type']}'")
+
+            if not cursor.fetchone():
+                # Associate company with industry
+                cursor.execute(
+                    """
+                    INSERT INTO company_industries (company_id, industry_id)
+                    VALUES (%s, %s)
+                    """,
+                    (company_id, industry_id)
+                )
+                logger.debug(f"Associated company '{company_data['company_name']}' with industry '{ind['type']}'")
+            else:
+                logger.debug(
+                    f"Company '{company_data['company_name']}' already associated with industry '{ind['type']}'")
 
         return company_id
     except Exception as e:
-        logger.error(f"Error inserting company {company_data['company_name']}: {str(e)}")
+        logger.error(f"Error processing company {company_data['company_name']}: {str(e)}")
+        raise
         raise
 
 def insert_data(data):
