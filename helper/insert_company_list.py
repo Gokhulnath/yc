@@ -23,6 +23,16 @@ load_dotenv()
 DB_PARAMS = get_db_params_from_env()
 
 
+def _get_year(batch):
+    # Extract the last two characters from the input string
+    last_two = batch[-2:]
+
+    # Concatenate "20" to the front
+    year = "20" + last_two
+
+    return int(year)
+
+
 def _get_or_create_batch(cursor, batch_name, batch_link):
     """
     Check if batch exists and return its ID. If not, create it and return the new ID.
@@ -40,9 +50,10 @@ def _get_or_create_batch(cursor, batch_name, batch_link):
             return result[0]
         else:
             # Insert new batch
+
             cursor.execute(
-                "INSERT INTO batches (batch, batch_link) VALUES (%s, %s) RETURNING id",
-                (batch_name, batch_link)
+                "INSERT INTO batches (batch, batch_link, year) VALUES (%s, %s, %s) RETURNING id",
+                (batch_name, batch_link, _get_year(batch_name))
             )
             batch_id = cursor.fetchone()[0]
             logger.info(f"Created new batch '{batch_name}' with ID: {batch_id}")

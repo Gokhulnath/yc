@@ -5,6 +5,7 @@ CREATE TABLE batches (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,  -- UUID for id
     batch VARCHAR(255) NOT NULL,  -- Batch name or ID
     batch_link TEXT NOT NULL,  -- Link associated with the batch
+    year INTEGER NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Timestamp for last update
     company_count INT DEFAULT 0  -- Count of companies in the batch
 );

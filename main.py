@@ -20,7 +20,7 @@ def get_all_batch_based_companies():
 def main():
     try:
         # get_all_batch_based_companies()
-        get_all_companies_html()
+        # get_all_companies_html()
         print("If you see this message, the application is fucking working fine")
     except Exception as e:
         print(e)
