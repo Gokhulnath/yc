@@ -542,7 +542,7 @@ def process_companies(batch_size=50, max_retries=3, start_from=0, limit=None):
                 'children': [
                     {
                         "tag_type": "a",
-                        "sub_word": 'people',
+                        "sub_word": '/people/',
                         "key_name": "primary_partner"
                     },
                     {
