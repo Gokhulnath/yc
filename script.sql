@@ -20,16 +20,31 @@ CREATE TABLE industries (
 );
 
 -- Create companies table with foreign key referencing batches
-CREATE TABLE companies (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,  -- UUID for id
-    logo TEXT NOT NULL,
-    company_name VARCHAR(255) NOT NULL,
-    link TEXT NOT NULL,
-    location VARCHAR(255),  -- Location can be NULL
-    short_description TEXT,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Timestamp for last update
-    batch_id UUID,  -- Foreign key reference to batches table
-    FOREIGN KEY (batch_id) REFERENCES batches(id)  -- Foreign key constraint to batches
+create table companies
+(
+    id                uuid      default gen_random_uuid() not null
+        primary key,
+    logo              text                                not null,
+    company_name      varchar(255)                        not null,
+    link              text                                not null,
+    location          varchar(255),
+    short_description text,
+    updated_at        timestamp default CURRENT_TIMESTAMP,
+    batch_id          uuid
+        references batches,
+    tags              text[],
+    job_count         varchar(50),
+    domain            text,
+    description       text,
+    team_size         varchar(50),
+    primary_partner   text,
+    linkedin          text,
+    x                 text,
+    twitter           text,
+    facebook          text,
+    github            text,
+    crunchbase        text,
+    emails            text[]
 );
 
 -- Create a join table to associate multiple industries with companies
@@ -40,6 +55,23 @@ CREATE TABLE company_industries (
     FOREIGN KEY (company_id) REFERENCES companies(id) ON DELETE CASCADE,  -- Foreign key constraint to companies
     FOREIGN KEY (industry_id) REFERENCES industries(id) ON DELETE CASCADE  -- Foreign key constraint to industries
 );
+
+-- Create a new table for people associated with companies
+CREATE TABLE people (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    company_id UUID NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    designation VARCHAR(255),
+    linkedin TEXT,
+    x TEXT,
+    twitter TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (company_id) REFERENCES companies(id) ON DELETE CASCADE
+);
+
+-- Create index for faster lookups
+CREATE INDEX idx_people_company_id ON people(company_id);
 
 -- Create a trigger function to update company_count in batches
 CREATE OR REPLACE FUNCTION update_company_count()
