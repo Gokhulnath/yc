@@ -33,7 +33,7 @@ def main():
     try:
         # get_all_batch_based_companies()
         # get_all_companies_html()
-        # update_recent_batch_based_companies()
+        update_recent_batch_based_companies()
         print("If you see this message, the application is fucking working fine")
     except Exception as e:
         print(e)
