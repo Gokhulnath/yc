@@ -11,7 +11,7 @@ import os
 from flask import request, jsonify
 
 # Constants for todo tags
-TODO_TAGS = ['Emailed', 'inProgress', 'LinkedIn']
+TODO_TAGS = ['Emailed', 'inProgress', 'LinkedIn', 'Ignore', 'NotHiringNow']
 
 
 @app.route('/')
