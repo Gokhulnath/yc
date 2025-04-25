@@ -44,7 +44,10 @@ create table companies
     facebook          text,
     github            text,
     crunchbase        text,
-    emails            text[]
+    emails            text[],
+    worth             boolean default False,
+    remarks           text,
+    todo               text[]
 );
 
 -- Create a join table to associate multiple industries with companies

@@ -4,6 +4,7 @@ import logging
 from dotenv import load_dotenv
 
 from helper.database_connector import get_db_params_from_env
+from helper.parse_company_info import parse_company_info
 
 # Configure logging
 logging.basicConfig(
@@ -159,11 +160,9 @@ def _insert_company(cursor, company_data, batch_id):
             else:
                 logger.debug(
                     f"Company '{company_data['company_name']}' already associated with industry '{ind['type']}'")
-
         return company_id
     except Exception as e:
         logger.error(f"Error processing company {company_data['company_name']}: {str(e)}")
-        raise
         raise
 
 def insert_data(data):

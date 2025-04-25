@@ -1,6 +1,8 @@
 from helper.company_list import *
 from helper.dowload_all_company_html import get_all_companies_html
 from helper.insert_company_list import *
+from helper.parse_company_info import parse_company_info
+
 
 def get_all_batch_based_companies():
     batches = ["X25", "W25", "F24", "S24", "W24", "S23", "W23", "S22", "W22", "S21", "W21", "S20", "W20", "S19", "W19",
@@ -33,7 +35,10 @@ def main():
     try:
         # get_all_batch_based_companies()
         # get_all_companies_html()
-        update_recent_batch_based_companies()
+        # update_recent_batch_based_companies()
+        # company_ids = ['a9f8ab47-f183-4eb1-8047-7e195d10ad2e']
+        # for i in company_ids:
+        #     parse_company_info(company_id=i)
         print("If you see this message, the application is fucking working fine")
     except Exception as e:
         print(e)

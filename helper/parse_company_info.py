@@ -35,7 +35,7 @@ DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 
-def get_db_connection():
+def _get_db_connection():
     """Create a database connection"""
     try:
         conn = psycopg2.connect(
@@ -51,7 +51,7 @@ def get_db_connection():
         raise
 
 
-def get_connection_pool(min_conn=1, max_conn=10):
+def _get_connection_pool(min_conn=1, max_conn=10):
     """Create a connection pool for database connections"""
     try:
         from psycopg2 import pool
@@ -73,7 +73,7 @@ def get_connection_pool(min_conn=1, max_conn=10):
         raise
 
 
-def extract_content_to_json(url, extraction_list, timeout=30):
+def _extract_content_to_json(url, extraction_list, timeout=30):
     """
     Extract content from a webpage based on a unified extraction list.
     Args:
@@ -98,7 +98,7 @@ def extract_content_to_json(url, extraction_list, timeout=30):
         results = {}
 
         # Default extraction for mailto links to collect email addresses
-        results["emails"] = extract_emails_from_content(soup)
+        results["emails"] = _extract_emails_from_content(soup)
 
         # Initialize all keys with null values
         for item in extraction_list:
@@ -117,13 +117,13 @@ def extract_content_to_json(url, extraction_list, timeout=30):
         for item in extraction_list:
             # Special handling for array of cards
             if 'array_name' in item and 'children' in item:
-                array_items = extract_array_from_cards(soup, item)
+                array_items = _extract_array_from_cards(soup, item)
                 results[item['array_name']] = array_items
                 continue
 
             # Special handling for single card with links
             if 'children' in item:
-                card_links = extract_links_from_card(soup, item)
+                card_links = _extract_links_from_card(soup, item)
                 results.update(card_links)
                 continue
 
@@ -157,7 +157,7 @@ def extract_content_to_json(url, extraction_list, timeout=30):
         return {}
 
 
-def extract_emails_from_content(soup):
+def _extract_emails_from_content(soup):
     """
     Extract all email addresses from mailto links in the content area.
     Ignores navigation, header, and footer sections.
@@ -213,7 +213,7 @@ def extract_emails_from_content(soup):
     return emails
 
 
-def extract_links_from_card(soup, card_config):
+def _extract_links_from_card(soup, card_config):
     """
     Extract links from cards based on specified configuration.
     Args:
@@ -255,7 +255,7 @@ def extract_links_from_card(soup, card_config):
     return results
 
 
-def extract_array_from_cards(soup, card_config):
+def _extract_array_from_cards(soup, card_config):
     """
     Extract an array of items from multiple cards.
     Args:
@@ -303,7 +303,7 @@ def extract_array_from_cards(soup, card_config):
     return results
 
 
-def update_company_data(conn, company_id, company_data):
+def _update_company_data(conn, company_id, company_data):
     """Update company data in the database"""
     try:
         cursor = conn.cursor()
@@ -396,11 +396,11 @@ def update_company_data(conn, company_id, company_data):
         return False
 
 
-def process_retry_queue(retry_queue, extraction_list, max_retries=3):
+def _process_retry_queue(retry_queue, extraction_list, max_retries=3):
     """Process companies that failed in the initial run with multiple retry attempts"""
     conn = None
     try:
-        conn = get_db_connection()
+        conn = _get_db_connection()
 
         total_retries = len(retry_queue)
         retry_success = 0
@@ -420,11 +420,11 @@ def process_retry_queue(retry_queue, extraction_list, max_retries=3):
                     logger.info(f"Retry {retry_attempt} for company ID: {company_id}")
 
                     # Extract data with increased timeout
-                    company_data = extract_content_to_json(company_link, extraction_list, timeout=60 * retry_attempt)
+                    company_data = _extract_content_to_json(company_link, extraction_list, timeout=60 * retry_attempt)
 
                     if company_data:
                         # Update company in database
-                        success = update_company_data(conn, company_id, company_data)
+                        success = _update_company_data(conn, company_id, company_data)
                         if success:
                             retry_success += 1
                             print(
@@ -467,11 +467,11 @@ def process_retry_queue(retry_queue, extraction_list, max_retries=3):
             conn.close()
 
 
-def process_companies(batch_size=50, max_retries=3, start_from=0, limit=None):
+def _process_companies(batch_size=50, max_retries=3, start_from=0, limit=None, company_id=None):
     """Process all companies in the database with batch processing and progress tracking"""
     conn = None
     try:
-        conn = get_db_connection()
+        conn = _get_db_connection()
         cursor = conn.cursor()
 
         # Get total count of companies with links
@@ -479,7 +479,10 @@ def process_companies(batch_size=50, max_retries=3, start_from=0, limit=None):
         total_companies = cursor.fetchone()[0]
 
         # Modify the query to support start_from and limit
-        query = "SELECT id, link FROM companies WHERE link IS NOT NULL ORDER BY id"
+        if company_id:
+            query = f"SELECT id, link FROM companies WHERE link IS NOT NULL AND id = '{company_id}' ORDER BY id"
+        else:
+            query = "SELECT id, link FROM companies WHERE link IS NOT NULL ORDER BY id"
         if limit:
             query += f" LIMIT {limit}"
         if start_from:
@@ -631,11 +634,11 @@ def process_companies(batch_size=50, max_retries=3, start_from=0, limit=None):
                     logger.info(f"Processing company ID: {company_id}, Link: {company_link}")
 
                     # Extract data from company page
-                    company_data = extract_content_to_json(company_link, extraction_list)
+                    company_data = _extract_content_to_json(company_link, extraction_list)
 
                     if company_data:
                         # Update company in database
-                        success = update_company_data(conn, company_id, company_data)
+                        success = _update_company_data(conn, company_id, company_data)
                         if success:
                             batch_results["success"] += 1
                             success_count += 1
@@ -673,7 +676,7 @@ def process_companies(batch_size=50, max_retries=3, start_from=0, limit=None):
         # Process retry queue with fallback
         if retry_queue:
             logger.info(f"Attempting to process {len(retry_queue)} failed companies")
-            process_retry_queue(retry_queue, extraction_list, max_retries)
+            _process_retry_queue(retry_queue, extraction_list, max_retries)
 
         logger.info(
             f"Final results: {success_count}/{processing_count} companies processed successfully, {failed_count} failed")
@@ -685,7 +688,7 @@ def process_companies(batch_size=50, max_retries=3, start_from=0, limit=None):
             conn.close()
 
 
-def main():
+def parse_company_info(company_id=None):
     """Main function with command-line arguments"""
     parser = argparse.ArgumentParser(description='Process company data from websites and update database.')
     parser.add_argument('--batch-size', type=int, default=50, help='Number of companies to process in each batch')
@@ -700,11 +703,7 @@ def main():
     logger.info(
         f"Configuration: batch_size={args.batch_size}, max_retries={args.max_retries}, start_from={args.start_from}, limit={args.limit}")
 
-    process_companies(batch_size=args.batch_size, max_retries=args.max_retries, start_from=args.start_from,
-                      limit=args.limit)
+    _process_companies(batch_size=args.batch_size, max_retries=args.max_retries, start_from=args.start_from,
+                       limit=args.limit, company_id=company_id)
 
     logger.info("Company data update process completed")
-
-
-if __name__ == "__main__":
-    main()
