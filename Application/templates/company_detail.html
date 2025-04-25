@@ -1,0 +1,960 @@
+<!-- templates/company_detail.html (updated with people management) -->
+{% extends "base.html" %}
+
+{% block content %}
+<div id="company-container">
+    <div class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<!-- Add Person Modal -->
+<div class="modal fade" id="addPersonModal" tabindex="-1" aria-labelledby="addPersonModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPersonModalLabel">Add Team Member</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addPersonForm">
+                    <div class="mb-3">
+                        <label for="personName" class="form-label">Name*</label>
+                        <input type="text" class="form-control" id="personName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="personDesignation" class="form-label">Designation</label>
+                        <input type="text" class="form-control" id="personDesignation">
+                    </div>
+                    <div class="mb-3">
+                        <label for="personLinkedin" class="form-label">LinkedIn URL</label>
+                        <input type="url" class="form-control" id="personLinkedin">
+                    </div>
+                    <div class="mb-3">
+                        <label for="personEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="personEmail" placeholder="name@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="personTwitter" class="form-label">Twitter URL</label>
+                        <input type="url" class="form-control" id="personTwitter">
+                    </div>
+                    <div class="mb-3">
+                        <label for="personX" class="form-label">X URL</label>
+                        <input type="url" class="form-control" id="personX">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="savePersonBtn">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Person Modal -->
+<div class="modal fade" id="editPersonModal" tabindex="-1" aria-labelledby="editPersonModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPersonModalLabel">Edit Team Member</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editPersonForm">
+                    <input type="hidden" id="editPersonId">
+                    <div class="mb-3">
+                        <label for="editPersonName" class="form-label">Name*</label>
+                        <input type="text" class="form-control" id="editPersonName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPersonDesignation" class="form-label">Designation</label>
+                        <input type="text" class="form-control" id="editPersonDesignation">
+                    </div>
+                     <div class="mb-3">
+                        <label for="editPersonEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="editPersonEmail" placeholder="name@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPersonLinkedin" class="form-label">LinkedIn URL</label>
+                        <input type="url" class="form-control" id="editPersonLinkedin">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPersonTwitter" class="form-label">Twitter URL</label>
+                        <input type="url" class="form-control" id="editPersonTwitter">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPersonX" class="form-label">X URL</label>
+                        <input type="url" class="form-control" id="editPersonX">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger me-auto" id="deletePersonBtn">Delete</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="updatePersonBtn">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- LinkedIn Request Modal -->
+<div class="modal fade" id="linkedinModal" tabindex="-1" aria-labelledby="linkedinModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="linkedinModalLabel">Generate LinkedIn Connection Request</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="linkedinPoints" class="form-label">Additional Points (Optional)</label>
+                    <textarea class="form-control" id="linkedinPoints" rows="3" placeholder="Enter any specific points you want to include in your connection request..."></textarea>
+                </div>
+                <div id="linkedinGeneratedContent" class="d-none">
+                    <div class="alert alert-info">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <strong>Generated Connection Request:</strong>
+                            <span id="linkedinCharCount" class="badge bg-secondary">0/300</span>
+                        </div>
+                        <div class="p-2 bg-light rounded border mb-2">
+                            <p id="linkedinRequestText" class="mb-0"></p>
+                        </div>
+                        <button class="btn btn-sm btn-secondary" id="copyLinkedinRequest">
+                            <i class="bi bi-clipboard"></i> Copy to Clipboard
+                        </button>
+                    </div>
+                </div>
+                <div id="linkedinGeneratingSpinner" class="d-none text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p>Generating request with Ollama...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="generateLinkedinRequest">Generate</button>
+                <button type="button" class="btn btn-success d-none" id="openLinkedinLinks">
+                    <i class="bi bi-box-arrow-up-right"></i> Open LinkedIn Links
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Email Template Modal -->
+<div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="emailModalLabel">Generate Email Template</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="emailPoints" class="form-label">Additional Points (Optional)</label>
+                    <textarea class="form-control" id="emailPoints" rows="3" placeholder="Enter any specific points you want to include in your email..."></textarea>
+                </div>
+                <div id="emailGeneratedContent" class="d-none">
+                    <div class="alert alert-info">
+                        <strong>Generated Email:</strong>
+                        <div class="p-2 bg-light rounded border mb-2 mt-2">
+                            <p><strong>Subject:</strong> <span id="emailSubject"></span></p>
+                            <hr>
+                            <div id="emailBody"></div>
+                        </div>
+                        <div class="d-flex gap-2 mt-2">
+                            <button class="btn btn-sm btn-secondary" id="copyEmailSubject">
+                                <i class="bi bi-clipboard"></i> Copy Subject
+                            </button>
+                            <button class="btn btn-sm btn-secondary" id="copyEmailBody">
+                                <i class="bi bi-clipboard"></i> Copy Body
+                            </button>
+                            <button class="btn btn-sm btn-secondary" id="copyAllEmail">
+                                <i class="bi bi-clipboard"></i> Copy All
+                            </button>
+                            <button class="btn btn-sm btn-secondary" id="copyAllEmailsBtn">
+                                <i class="bi bi-clipboard"></i> Copy Email
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="emailGeneratingSpinner" class="d-none text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p>Generating email with Ollama...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="generateEmail">Generate</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const companyId = '{{ company_id }}';
+    const companyContainer = document.getElementById('company-container');
+    const todoTags = ['Emailed', 'inProgress', 'LinkedIn']; // Hardcoded todo tags
+    let companyData = null;
+    let peopleData = null;
+
+    // Bootstrap modals
+    let addPersonModal = null;
+    let editPersonModal = null;
+
+    async function loadCompanyDetails() {
+        try {
+            const response = await fetch(`/api/companies/${companyId}`);
+            const data = await response.json();
+
+            companyData = data.company;
+            peopleData = data.people;
+
+            // Create company details HTML
+            let html = `
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <a href="/" class="btn btn-outline-secondary mb-3">&laquo; Back to Companies</a>
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="${companyData.logo || '/static/placeholder.png'}" alt="${companyData.company_name}" class="me-3" style="width: 80px; height: 80px; object-fit: contain;">
+                            <div>
+                                <h1>${companyData.company_name}</h1>
+                                <p class="lead">${companyData.short_description || ''}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 mb-3">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#linkedinModal">
+                                <i class="bi bi-linkedin"></i> LinkedIn Request
+                            </button>
+                            <button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#emailModal">
+                                <i class="bi bi-envelope"></i> Email Template
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5>Company Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <h6>Description</h6>
+                                    <p>${companyData.description || 'No description available.'}</p>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <h6>Location</h6>
+                                        <p>${companyData.location || 'Not specified'}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>Batch</h6>
+                                        <p>${companyData.batch || 'Not specified'}</p>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <h6>Team Size</h6>
+                                        <p>${companyData.team_size || 'Not specified'}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>Job Count</h6>
+                                        <p>${companyData.job_count || 'Not specified'}</p>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <h6>Industries</h6>
+                                    <div>
+                                        ${companyData.industries && companyData.industries.length > 0
+                                            ? companyData.industries.map(i => `<span class="badge bg-secondary me-1">${i.name}</span>`).join('')
+                                            : 'None specified'}
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <h6>Tags</h6>
+                                    <div>
+                                        ${companyData.tags && companyData.tags.length > 0
+                                            ? companyData.tags.map(tag => `<span class="badge bg-info me-1">${tag}</span>`).join('')
+                                            : 'None specified'}
+                                    </div>
+                                </div>
+
+                                <!-- Editable Todo Tags -->
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h6>Todo Tags</h6>
+                                        <button class="btn btn-sm btn-primary" id="edit-todo-btn">Edit</button>
+                                    </div>
+                                    <div id="todo-display">
+                                        ${companyData.todo && companyData.todo.length > 0
+                                            ? companyData.todo.map(todo => `<span class="badge bg-warning text-dark me-1">${todo}</span>`).join('')
+                                            : 'None specified'}
+                                    </div>
+                                    <div id="todo-edit" class="d-none">
+                                        <div class="mb-2">
+                                            ${todoTags.map(tag => `
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input todo-checkbox" type="checkbox" id="todo-${tag}" value="${tag}" ${companyData.todo && companyData.todo.includes(tag) ? 'checked' : ''}>
+                                                    <label class="form-check-label" for="todo-${tag}">${tag}</label>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-sm btn-success" id="save-todo-btn">Save</button>
+                                            <button class="btn btn-sm btn-secondary" id="cancel-todo-btn">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <h6>Worth</h6>
+                                    <div>
+                                        <span class="badge ${companyData.worth ? 'bg-success' : 'bg-secondary'}">${companyData.worth ? 'Yes' : 'No'}</span>
+                                    </div>
+                                </div>
+
+                                <!-- Editable Remarks -->
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h6>Remarks</h6>
+                                        <button class="btn btn-sm btn-primary" id="edit-remarks-btn">Edit</button>
+                                    </div>
+                                    <div id="remarks-display">
+                                        <p>${companyData.remarks || 'None'}</p>
+                                    </div>
+                                    <div id="remarks-edit" class="d-none">
+                                        <textarea class="form-control mb-2" id="remarks-textarea" rows="3">${companyData.remarks || ''}</textarea>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-sm btn-success" id="save-remarks-btn">Save</button>
+                                            <button class="btn btn-sm btn-secondary" id="cancel-remarks-btn">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5>Links</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul class="list-group">
+                                            ${companyData.link ? `<li class="list-group-item"><strong>Website:</strong> <a href="${companyData.link}" target="_blank">${companyData.link}</a></li>` : ''}
+                                            ${companyData.domain ? `<li class="list-group-item"><strong>Domain:</strong> <a href="${companyData.domain}" target="_blank">${companyData.domain}</a></li>` : ''}
+                                            ${companyData.linkedin ? `<li class="list-group-item"><strong>LinkedIn:</strong> <a href="${companyData.linkedin}" target="_blank">LinkedIn</a></li>` : ''}
+                                            ${companyData.twitter ? `<li class="list-group-item"><strong>Twitter:</strong> <a href="${companyData.twitter}" target="_blank">Twitter</a></li>` : ''}
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul class="list-group">
+                                            ${companyData.x ? `<li class="list-group-item"><strong>X:</strong> <a href="${companyData.x}" target="_blank">X</a></li>` : ''}
+                                            ${companyData.facebook ? `<li class="list-group-item"><strong>Facebook:</strong> <a href="${companyData.facebook}" target="_blank">Facebook</a></li>` : ''}
+                                            ${companyData.github ? `<li class="list-group-item"><strong>GitHub:</strong> <a href="${companyData.github}" target="_blank">GitHub</a></li>` : ''}
+                                            ${companyData.crunchbase ? `<li class="list-group-item"><strong>Crunchbase:</strong> <a href="${companyData.crunchbase}" target="_blank">Crunchbase</a></li>` : ''}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        ${companyData.emails && companyData.emails.length > 0 ? `
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5>Contact Emails</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    ${companyData.emails.map(email => `<li class="list-group-item">${email}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                        ` : ''}
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5>Team (${peopleData.length})</h5>
+                                <button class="btn btn-sm btn-success" id="add-person-btn" data-bs-toggle="modal" data-bs-target="#addPersonModal">
+                                    Add Person
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div id="people-container">
+                                    ${renderPeopleList()}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            companyContainer.innerHTML = html;
+
+            // Initialize Bootstrap modals
+            addPersonModal = new bootstrap.Modal(document.getElementById('addPersonModal'));
+            editPersonModal = new bootstrap.Modal(document.getElementById('editPersonModal'));
+
+            // Add event listeners for editing remarks
+            document.getElementById('edit-remarks-btn').addEventListener('click', () => {
+                document.getElementById('remarks-display').classList.add('d-none');
+                document.getElementById('remarks-edit').classList.remove('d-none');
+            });
+
+            document.getElementById('cancel-remarks-btn').addEventListener('click', () => {
+                document.getElementById('remarks-display').classList.remove('d-none');
+                document.getElementById('remarks-edit').classList.add('d-none');
+            });
+
+            document.getElementById('save-remarks-btn').addEventListener('click', async () => {
+                const remarks = document.getElementById('remarks-textarea').value;
+                await updateCompanyField('remarks', remarks);
+
+                // Update the display
+                document.getElementById('remarks-display').innerHTML = `<p>${remarks || 'None'}</p>`;
+                document.getElementById('remarks-display').classList.remove('d-none');
+                document.getElementById('remarks-edit').classList.add('d-none');
+            });
+
+            // Add event listeners for editing todo tags
+            document.getElementById('edit-todo-btn').addEventListener('click', () => {
+                document.getElementById('todo-display').classList.add('d-none');
+                document.getElementById('todo-edit').classList.remove('d-none');
+            });
+
+            document.getElementById('cancel-todo-btn').addEventListener('click', () => {
+                document.getElementById('todo-display').classList.remove('d-none');
+                document.getElementById('todo-edit').classList.add('d-none');
+            });
+
+            document.getElementById('save-todo-btn').addEventListener('click', async () => {
+                const todoCheckboxes = document.querySelectorAll('.todo-checkbox:checked');
+                const selectedTodos = Array.from(todoCheckboxes).map(cb => cb.value);
+
+                await updateCompanyField('todo', selectedTodos);
+
+                // Update the display
+                const todoDisplay = document.getElementById('todo-display');
+                if (selectedTodos.length > 0) {
+                    todoDisplay.innerHTML = selectedTodos.map(todo =>
+                        `<span class="badge bg-warning text-dark me-1">${todo}</span>`
+                    ).join('');
+                } else {
+                    todoDisplay.innerHTML = 'None specified';
+                }
+
+                todoDisplay.classList.remove('d-none');
+                document.getElementById('todo-edit').classList.add('d-none');
+            });
+
+            // Add event listeners for person management
+            document.getElementById('savePersonBtn').addEventListener('click', addPerson);
+            document.getElementById('updatePersonBtn').addEventListener('click', updatePerson);
+            document.getElementById('deletePersonBtn').addEventListener('click', deletePerson);
+
+            // Add click handlers for edit buttons on each person
+            setupPersonEditButtons();
+
+        } catch (error) {
+            console.error('Error loading company details:', error);
+            companyContainer.innerHTML = '<div class="alert alert-danger">Error loading company details. Please try again.</div>';
+        }
+    }
+
+    // Function to render the people list
+    function renderPeopleList() {
+        if (peopleData.length === 0) {
+            return '<p>No team members found.</p>';
+        }
+
+        return `
+        <div class="list-group">
+            ${peopleData.map(person => `
+            <div class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1">${person.name}</h6>
+                        ${person.designation ? `<small class="text-muted">${person.designation}</small>` : ''}
+                        ${person.email ? `<div><small class="text-muted"><i class="bi bi-envelope"></i> ${person.email}</small></div>` : ''}
+                    </div>
+                    <div>
+                        ${person.linkedin ? `<a href="${person.linkedin}" target="_blank" class="btn btn-sm btn-outline-primary me-1" title="LinkedIn"><i class="bi bi-linkedin"></i></a>` : ''}
+                        ${person.twitter ? `<a href="${person.twitter}" target="_blank" class="btn btn-sm btn-outline-info me-1" title="Twitter"><i class="bi bi-twitter"></i></a>` : ''}
+                        ${person.x ? `<a href="${person.x}" target="_blank" class="btn btn-sm btn-outline-dark me-1" title="X"><i class="bi bi-x"></i></a>` : ''}
+                        <button class="btn btn-sm btn-outline-secondary edit-person-btn" data-person-id="${person.id}" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            `).join('')}
+        </div>
+        `;
+    }
+
+
+    // Function to set up edit buttons for each person
+       function setupPersonEditButtons() {
+        document.querySelectorAll('.edit-person-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const personId = e.currentTarget.getAttribute('data-person-id');
+                const person = peopleData.find(p => p.id === personId);
+
+                if (person) {
+                    // Fill the edit form with person data
+                    document.getElementById('editPersonId').value = person.id;
+                    document.getElementById('editPersonName').value = person.name || '';
+                    document.getElementById('editPersonEmail').value = person.email || '';
+                    document.getElementById('editPersonDesignation').value = person.designation || '';
+                    document.getElementById('editPersonLinkedin').value = person.linkedin || '';
+                    document.getElementById('editPersonTwitter').value = person.twitter || '';
+                    document.getElementById('editPersonX').value = person.x || '';
+
+                    // Show the edit modal
+                    editPersonModal.show();
+                }
+            });
+        });
+    }
+
+
+    // Function to add a new person
+    async function addPerson() {
+        const name = document.getElementById('personName').value.trim();
+        if (!name) {
+            alert('Name is required');
+            return;
+        }
+
+        const personData = {
+            company_id: companyId,
+            name: name,
+            email: document.getElementById('personEmail').value.trim(),
+            designation: document.getElementById('personDesignation').value.trim(),
+            linkedin: document.getElementById('personLinkedin').value.trim(),
+            twitter: document.getElementById('personTwitter').value.trim(),
+            x: document.getElementById('personX').value.trim()
+        };
+
+        try {
+            const response = await fetch('/api/people', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(personData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add person');
+            }
+
+            const result = await response.json();
+
+            // Add the new person to our local data
+            peopleData.push(result.person);
+
+            // Update the people list in the UI
+            document.getElementById('people-container').innerHTML = renderPeopleList();
+
+            // Setup edit buttons for the updated list
+            setupPersonEditButtons();
+
+            // Close the modal and reset the form
+            addPersonModal.hide();
+            document.getElementById('addPersonForm').reset();
+
+        } catch (error) {
+            console.error('Error adding person:', error);
+            alert('Failed to add person. Please try again.');
+        }
+    }
+
+    // Function to update a person
+    async function updatePerson() {
+        const personId = document.getElementById('editPersonId').value;
+        const name = document.getElementById('editPersonName').value.trim();
+
+        if (!name) {
+            alert('Name is required');
+            return;
+        }
+
+        const personData = {
+            name: name,
+            email: document.getElementById('editPersonEmail').value.trim(),
+            designation: document.getElementById('editPersonDesignation').value.trim(),
+            linkedin: document.getElementById('editPersonLinkedin').value.trim(),
+            twitter: document.getElementById('editPersonTwitter').value.trim(),
+            x: document.getElementById('editPersonX').value.trim()
+        };
+
+        try {
+            const response = await fetch(`/api/people/${personId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(personData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update person');
+            }
+
+            const result = await response.json();
+
+            // Update the person in our local data
+            const index = peopleData.findIndex(p => p.id === personId);
+            if (index !== -1) {
+                peopleData[index] = result.person;
+            }
+
+            // Update the people list in the UI
+            document.getElementById('people-container').innerHTML = renderPeopleList();
+
+            // Setup edit buttons for the updated list
+            setupPersonEditButtons();
+
+            // Close the modal
+            editPersonModal.hide();
+
+        } catch (error) {
+            console.error('Error updating person:', error);
+            alert('Failed to update person. Please try again.');
+        }
+    }
+
+    // Function to delete a person
+    async function deletePerson() {
+        if (!confirm('Are you sure you want to delete this person?')) {
+            return;
+        }
+
+        const personId = document.getElementById('editPersonId').value;
+
+        try {
+            const response = await fetch(`/api/people/${personId}`, {
+                method: 'DELETE'
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete person');
+            }
+
+            // Remove the person from our local data
+            peopleData = peopleData.filter(p => p.id !== personId);
+
+            // Update the people list in the UI
+            document.getElementById('people-container').innerHTML = renderPeopleList();
+
+            // Setup edit buttons for the updated list
+            setupPersonEditButtons();
+
+            // Close the modal
+            editPersonModal.hide();
+
+        } catch (error) {
+            console.error('Error deleting person:', error);
+            alert('Failed to delete person. Please try again.');
+        }
+    }
+
+    // Function to update a company field
+    async function updateCompanyField(field, value) {
+        try {
+            const response = await fetch(`/api/companies/${companyId}/update`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    field: field,
+                    value: value
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update company');
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error(`Error updating ${field}:`, error);
+            alert(`Failed to update ${field}. Please try again.`);
+        }
+    }
+
+    // Add these functions to your existing JavaScript in company_detail.html
+
+// Function to generate LinkedIn request using Ollama
+async function generateLinkedinRequest() {
+    const linkedinPoints = document.getElementById('linkedinPoints').value;
+    const generatingSpinner = document.getElementById('linkedinGeneratingSpinner');
+    const generatedContent = document.getElementById('linkedinGeneratedContent');
+    const requestText = document.getElementById('linkedinRequestText');
+    const charCount = document.getElementById('linkedinCharCount');
+    const openLinksBtn = document.getElementById('openLinkedinLinks');
+
+    // Show spinner, hide content
+    generatingSpinner.classList.remove('d-none');
+    generatedContent.classList.add('d-none');
+    openLinksBtn.classList.add('d-none');
+
+    try {
+        // Prepare company data for the prompt
+        const companyInfo = {
+            name: companyData.company_name,
+            description: companyData.short_description || '',
+            industry: companyData.industries ? companyData.industries.map(i => i.name).join(', ') : '',
+            location: companyData.location || ''
+        };
+
+        // Call backend API to generate LinkedIn request
+        const response = await fetch('/api/generate/linkedin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                company: companyInfo,
+                additional_points: linkedinPoints,
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to generate LinkedIn request');
+        }
+
+        const result = await response.json();
+
+        // Update UI with generated text
+        requestText.textContent = result.text;
+        charCount.textContent = `${result.text.length}/300`;
+
+        // Show content, hide spinner
+        generatedContent.classList.remove('d-none');
+        generatingSpinner.classList.add('d-none');
+        openLinksBtn.classList.remove('d-none');
+
+    } catch (error) {
+        console.error('Error generating LinkedIn request:', error);
+        alert('Failed to generate LinkedIn request. Please try again.');
+        generatingSpinner.classList.add('d-none');
+    }
+}
+
+// Function to open all LinkedIn links in new tabs
+// Function to open all LinkedIn links in new tabs
+function openLinkedinLinks() {
+    // Collect all LinkedIn links from company and people
+    const links = [];
+
+    // Add company LinkedIn if available
+    if (companyData.linkedin) {
+        links.push(companyData.linkedin);
+    }
+
+    // Add people LinkedIn links if available
+    peopleData.forEach(person => {
+        if (person.linkedin) {
+            links.push(person.linkedin);
+        }
+    });
+
+    // Open all links in new tabs simultaneously
+    links.forEach(function(url) {
+        let link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank';
+        link.click();
+    });
+
+    // Copy the generated text to clipboard
+    const requestText = document.getElementById('linkedinRequestText').textContent;
+    navigator.clipboard.writeText(requestText)
+        .then(() => {
+            alert('LinkedIn request copied to clipboard!');
+        })
+        .catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+}
+
+
+// Function to generate email using Ollama
+async function generateEmail() {
+    const emailPoints = document.getElementById('emailPoints').value;
+    const generatingSpinner = document.getElementById('emailGeneratingSpinner');
+    const generatedContent = document.getElementById('emailGeneratedContent');
+    const emailSubject = document.getElementById('emailSubject');
+    const emailBody = document.getElementById('emailBody');
+
+    // Show spinner, hide content
+    generatingSpinner.classList.remove('d-none');
+    generatedContent.classList.add('d-none');
+
+    try {
+        // Prepare company data for the prompt
+        const companyInfo = {
+            name: companyData.company_name,
+            description: companyData.short_description || '',
+            industry: companyData.industries ? companyData.industries.map(i => i.name).join(', ') : '',
+            location: companyData.location || ''
+        };
+
+        // Call backend API to generate email
+        const response = await fetch('/api/generate/email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                company: companyInfo,
+                additional_points: emailPoints
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to generate email');
+        }
+
+        const result = await response.json();
+
+        // Update UI with generated text
+        emailSubject.textContent = result.subject;
+        emailBody.innerHTML = result.body.replace(/\n/g, '<br>');
+
+        // Show content, hide spinner
+        generatedContent.classList.remove('d-none');
+        generatingSpinner.classList.add('d-none');
+
+    } catch (error) {
+        console.error('Error generating email:', error);
+        alert('Failed to generate email. Please try again.');
+        generatingSpinner.classList.add('d-none');
+    }
+}
+
+// Function to copy email subject to clipboard
+function copyEmailSubject() {
+    const subject = document.getElementById('emailSubject').textContent;
+    navigator.clipboard.writeText(subject)
+        .then(() => {
+            alert('Email subject copied to clipboard!');
+        })
+        .catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+}
+
+// Function to copy email body to clipboard
+function copyEmailBody() {
+    const body = document.getElementById('emailBody').innerText;
+    navigator.clipboard.writeText(body)
+        .then(() => {
+            alert('Email body copied to clipboard!');
+        })
+        .catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+}
+
+// Function to copy all email content to clipboard
+function copyAllEmail() {
+    const subject = document.getElementById('emailSubject').textContent;
+    const body = document.getElementById('emailBody').innerText;
+    const fullEmail = `Subject: ${subject}\n\n${body}`;
+
+    navigator.clipboard.writeText(fullEmail)
+        .then(() => {
+            alert('Full email copied to clipboard!');
+        })
+        .catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+}
+
+// Function to copy all emails from company and people
+function copyAllEmails() {
+    // Collect emails from company
+    const companyEmails = companyData.emails || [];
+
+    // Collect emails from people
+    const peopleEmails = peopleData
+        .filter(person => person.email && person.email.trim() !== '')
+        .map(person => person.email.trim());
+
+    // Combine all emails
+    const allEmails = [...companyEmails, ...peopleEmails];
+
+    // Check if we have any emails to copy
+    if (allEmails.length === 0) {
+        alert('No emails found for this company or its team members.');
+        return;
+    }
+
+    // Format emails with each email on a new line
+    const emailText = allEmails.join('\n');
+
+    // Copy to clipboard
+    navigator.clipboard.writeText(emailText)
+        .then(() => {
+            alert(`${allEmails.length} email(s) copied to clipboard!`);
+        })
+        .catch(err => {
+            console.error('Failed to copy emails: ', err);
+            alert('Failed to copy emails. Please try again.');
+        });
+}
+
+
+
+// Add event listeners after DOM content is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // LinkedIn request event listeners
+    document.getElementById('generateLinkedinRequest').addEventListener('click', generateLinkedinRequest);
+    document.getElementById('openLinkedinLinks').addEventListener('click', openLinkedinLinks);
+    document.getElementById('copyLinkedinRequest').addEventListener('click', () => {
+        const requestText = document.getElementById('linkedinRequestText').textContent;
+        navigator.clipboard.writeText(requestText)
+            .then(() => {
+                alert('LinkedIn request copied to clipboard!');
+            })
+            .catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+    });
+
+    // Email event listeners
+    document.getElementById('generateEmail').addEventListener('click', generateEmail);
+    document.getElementById('copyEmailSubject').addEventListener('click', copyEmailSubject);
+    document.getElementById('copyEmailBody').addEventListener('click', copyEmailBody);
+    document.getElementById('copyAllEmail').addEventListener('click', copyAllEmail);
+    document.getElementById('copyAllEmailsBtn').addEventListener('click', copyAllEmails);
+});
+
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', loadCompanyDetails);
+</script>
+{% endblock %}
+
+

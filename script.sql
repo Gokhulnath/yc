@@ -68,6 +68,7 @@ CREATE TABLE people (
     linkedin TEXT,
     x TEXT,
     twitter TEXT,
+    email TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (company_id) REFERENCES companies(id) ON DELETE CASCADE

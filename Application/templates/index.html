@@ -1,0 +1,350 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-6">
+        <h1>YC Companies</h1>
+    </div>
+    <div class="col-md-6">
+        <div class="input-group">
+            <input type="text" id="search-input" class="form-control" placeholder="Search companies or people...">
+            <button class="btn btn-primary" id="search-button">Search</button>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h5>Filters</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="batch-filter" class="form-label">Batch</label>
+                    <select id="batch-filter" class="form-select">
+                        <option value="">All Batches</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="industry-filter" class="form-label">Industry</label>
+                    <select id="industry-filter" class="form-select">
+                        <option value="">All Industries</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="todo-filter" class="form-label">Todo Tag</label>
+                    <select id="todo-filter" class="form-select">
+                        <option value="">All</option>
+                        {% for tag in todo_tags %}
+                        <option value="{{ tag }}">{{ tag }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="worth-filter" class="form-label">Worth</label>
+                    <select id="worth-filter" class="form-select">
+                        <option value="">All</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <button id="apply-filters" class="btn btn-primary">Apply Filters</button>
+                <button id="clear-filters" class="btn btn-secondary">Clear Filters</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <div id="companies-container">
+                    <div class="text-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="pagination-container" class="mt-4 d-flex justify-content-between align-items-center">
+                    <div>
+                        <span id="pagination-info"></span>
+                    </div>
+                    <div>
+                        <button id="prev-page" class="btn btn-sm btn-outline-secondary">&laquo; Previous</button>
+                        <button id="next-page" class="btn btn-sm btn-outline-secondary">Next &raquo;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Global variables
+    let currentPage = 1;
+    let totalPages = 1;
+    let perPage = 20;
+
+    // DOM elements
+    const companiesContainer = document.getElementById('companies-container');
+    const paginationInfo = document.getElementById('pagination-info');
+    const prevPageBtn = document.getElementById('prev-page');
+    const nextPageBtn = document.getElementById('next-page');
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const batchFilter = document.getElementById('batch-filter');
+    const industryFilter = document.getElementById('industry-filter');
+    const todoFilter = document.getElementById('todo-filter');
+    const worthFilter = document.getElementById('worth-filter');
+    const applyFiltersBtn = document.getElementById('apply-filters');
+    const clearFiltersBtn = document.getElementById('clear-filters');
+
+    // Load batches and industries for filters
+    async function loadFilters() {
+        try {
+            const [batchesResponse, industriesResponse] = await Promise.all([
+                fetch('/api/batches'),
+                fetch('/api/industries')
+            ]);
+
+            const batches = await batchesResponse.json();
+            const industries = await industriesResponse.json();
+
+            // Populate batch filter
+            batches.forEach(batch => {
+                const option = document.createElement('option');
+                option.value = batch.id;
+                option.textContent = `${batch.name} (${batch.company_count})`;
+                batchFilter.appendChild(option);
+            });
+
+            // Populate industry filter
+            industries.forEach(industry => {
+                const option = document.createElement('option');
+                option.value = industry.id;
+                option.textContent = `${industry.name} (${industry.company_count})`;
+                industryFilter.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error loading filters:', error);
+        }
+    }
+
+    // Load companies with pagination
+    async function loadCompanies() {
+        try {
+            companiesContainer.innerHTML = `
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            `;
+
+            // Build query parameters
+            const params = new URLSearchParams({
+                page: currentPage,
+                per_page: perPage
+            });
+
+            // Add search term if present
+            if (searchInput.value.trim()) {
+                params.append('search', searchInput.value.trim());
+            }
+
+            // Add filters if selected
+            if (batchFilter.value) params.append('batch_id', batchFilter.value);
+            if (industryFilter.value) params.append('industry_id', industryFilter.value);
+            if (todoFilter.value) params.append('todo_tag', todoFilter.value);
+            if (worthFilter.value) params.append('worth', worthFilter.value);
+
+            const response = await fetch(`/api/companies?${params.toString()}`);
+            const data = await response.json();
+
+            // Update pagination info
+            totalPages = data.total_pages;
+            updatePaginationControls(data.page, data.total_pages, data.total);
+
+            // Render companies
+            if (data.companies.length === 0) {
+                companiesContainer.innerHTML = '<div class="alert alert-info">No companies found.</div>';
+                return;
+            }
+
+            const table = document.createElement('table');
+            table.className = 'table table-hover';
+
+            // Table header
+            const thead = document.createElement('thead');
+            thead.innerHTML = `
+                <tr>
+                    <th>Logo</th>
+                    <th>Company</th>
+                    <th>People</th>
+                    <th>Todo Tags</th>
+                    <th>Worth</th>
+                </tr>
+            `;
+            table.appendChild(thead);
+
+            // Table body
+            const tbody = document.createElement('tbody');
+            data.companies.forEach(company => {
+                const tr = document.createElement('tr');
+                tr.className = 'company-row';
+                tr.setAttribute('data-id', company.id);
+
+                // Logo cell
+                const logoCell = document.createElement('td');
+                logoCell.style.width = '60px';
+                if (company.logo) {
+                    const img = document.createElement('img');
+                    img.src = company.logo;
+                    img.alt = company.company_name;
+                    img.style.width = '50px';
+                    img.style.height = '50px';
+                    img.className = 'rounded';
+                    logoCell.appendChild(img);
+                } else {
+                    logoCell.textContent = 'No logo';
+                }
+
+                // Company name cell
+                const nameCell = document.createElement('td');
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'fw-bold';
+                nameDiv.textContent = company.company_name;
+                nameCell.appendChild(nameDiv);
+
+                if (company.short_description) {
+                    const descDiv = document.createElement('div');
+                    descDiv.className = 'small text-muted';
+                    descDiv.textContent = company.short_description;
+                    nameCell.appendChild(descDiv);
+                }
+
+                // People count cell
+                const peopleCell = document.createElement('td');
+                peopleCell.textContent = company.people_count;
+
+                // Todo tags cell
+                const todoCell = document.createElement('td');
+                if (company.todo && company.todo.length > 0) {
+                    company.todo.forEach(tag => {
+                        const tagSpan = document.createElement('span');
+                        tagSpan.className = 'todo-tag';
+                        tagSpan.textContent = tag;
+                        todoCell.appendChild(tagSpan);
+                    });
+                } else {
+                    todoCell.textContent = 'None';
+                }
+
+                // Worth toggle cell
+                const worthCell = document.createElement('td');
+                const worthToggle = document.createElement('button');
+                worthToggle.className = `btn btn-sm ${company.worth ? 'btn-success' : 'btn-outline-secondary'}`;
+                worthToggle.textContent = company.worth ? 'Yes' : 'No';
+                worthToggle.onclick = async (e) => {
+                    e.stopPropagation();
+                    try {
+                        const response = await fetch(`/api/companies/${company.id}/toggle-worth`, {
+                            method: 'POST'
+                        });
+                        const data = await response.json();
+                        worthToggle.className = `btn btn-sm ${data.worth ? 'btn-success' : 'btn-outline-secondary'}`;
+                        worthToggle.textContent = data.worth ? 'Yes' : 'No';
+                    } catch (error) {
+                        console.error('Error toggling worth:', error);
+                    }
+                };
+                worthCell.appendChild(worthToggle);
+
+                // Add cells to row
+                tr.appendChild(logoCell);
+                tr.appendChild(nameCell);
+                tr.appendChild(peopleCell);
+                tr.appendChild(todoCell);
+                tr.appendChild(worthCell);
+
+                // Add click event to row
+                tr.addEventListener('click', () => {
+                    window.location.href = `/company/${company.id}`;
+                });
+
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(tbody);
+            companiesContainer.innerHTML = '';
+            companiesContainer.appendChild(table);
+
+        } catch (error) {
+            console.error('Error loading companies:', error);
+            companiesContainer.innerHTML = '<div class="alert alert-danger">Error loading companies. Please try again.</div>';
+        }
+    }
+
+    // Update pagination controls
+    function updatePaginationControls(currentPage, totalPages, totalItems) {
+        prevPageBtn.disabled = currentPage <= 1;
+        nextPageBtn.disabled = currentPage >= totalPages;
+
+        const start = (currentPage - 1) * perPage + 1;
+        const end = Math.min(currentPage * perPage, totalItems);
+
+        paginationInfo.textContent = `Showing ${start}-${end} of ${totalItems} companies`;
+    }
+
+    // Event listeners
+    prevPageBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            loadCompanies();
+        }
+    });
+
+    nextPageBtn.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            loadCompanies();
+        }
+    });
+
+    searchButton.addEventListener('click', () => {
+        currentPage = 1;
+        loadCompanies();
+    });
+
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            currentPage = 1;
+            loadCompanies();
+        }
+    });
+
+    applyFiltersBtn.addEventListener('click', () => {
+        currentPage = 1;
+        loadCompanies();
+    });
+
+    clearFiltersBtn.addEventListener('click', () => {
+        batchFilter.value = '';
+        industryFilter.value = '';
+        todoFilter.value = '';
+        worthFilter.value = '';
+        searchInput.value = '';
+        currentPage = 1;
+        loadCompanies();
+    });
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        loadFilters();
+        loadCompanies();
+    });
+</script>
+{% endblock %}
