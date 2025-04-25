@@ -4,3 +4,4 @@ downloaded_html/*
 *.log
 /helper/extracted_content.json
 /helper/output.html
+/helper/emails/*
