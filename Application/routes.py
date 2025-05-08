@@ -97,7 +97,7 @@ def get_companies():
 
 @app.route('/api/batches')
 def get_batches():
-    batches = Batch.query.all()
+    batches = Batch.query.order_by(Batch.year.desc()).all()
     return jsonify([{
         'id': str(batch.id),
         'name': batch.batch,
@@ -125,7 +125,16 @@ def toggle_worth(company_id):
 
 @app.route('/company/<uuid:company_id>')
 def company_detail(company_id):
-    return render_template('company_detail.html', company_id=company_id)
+    filter_params = {
+        'search': request.args.get('search', ''),
+        'batch_id': request.args.get('batch_id', ''),
+        'industry_id': request.args.get('industry_id', ''),
+        'todo_tag': request.args.get('todo_tag', ''),
+        'worth': request.args.get('worth', None),
+        'page': request.args.get('page', 1)
+    }
+    return render_template('company_detail.html', company_id=company_id,
+                          filter_params=filter_params)
 
 
 @app.route('/api/companies/<uuid:company_id>')
@@ -302,28 +311,34 @@ def generate_linkedin_request():
 
     # Construct the prompt for Ollama
     prompt = f"""
-    You are a master's student in UIC in US, looking for potential connection in linkedin to get a job.
-    Resume content has all my personal details and pretend to be me: {resume_content}
-    
-    Generate a LinkedIn connection request for {company.get('name')} working people, asking for a intern opportunity. 
+    You are a master's student in Computer Science at UIC in the US, actively seeking connections to explore internship opportunities.
+    Use the resume content to authentically represent yourself: {resume_content}
 
-    Company details:
+    Generate a compelling LinkedIn connection request targeting professionals at {company.get('name')}.
+
+    Company context:
     - Name: {company.get('name')}
     - Description: {company.get('description')}
     - Industry: {company.get('industry')}
     - Location: {company.get('location')}
 
-    Additional points to include: {additional_points}
-    
-    Just say Hi, no need to specify their name.
-    The connection request should be professional, concise, and strictly under 300 characters.
-    Only provide the text of the connection request, nothing else.
+    Key points to incorporate:
+    - Mention your founding engineer experience at Chargebee microservice
+    - Reference your entrepreneurial mindset and "figure it out" attitude
+    - Express genuine interest in {company.get('name')}'s work
+    - {additional_points}
+
+    Start with "Hi," (no specific name needed)
+    The connection message must be professional, engaging, and STRICTLY under 300 characters as LinkedIn has a hard character limit.
+    Return ONLY the connection message text itself - no explanations, no quotation marks.
+
+    Include a clear, brief call to action (like connecting to discuss potential opportunities).
     """
 
     try:
         # Call Ollama to generate the LinkedIn request
         response = ollama.generate(
-            model='llama3.1:latest',  # Use your preferred model
+            model='gemma3:4b',  # Use your preferred model
             prompt=prompt,
             options={
                 'num_predict': 300  # Correct parameter for token limit
@@ -369,33 +384,72 @@ def generate_email():
 
     # Construct the enhanced prompt for Ollama with JSON output format
     prompt = f"""
-    You are a master's student in UIC in US, looking for potential connection to get a job.
-    Resume content has all my personal details and pretend to be me: {resume_content}
-    Generate a professional email for {company.get('name')}.
+    You are a personalized email writer for a master's student at UIC (University of Illinois at Chicago) seeking professional connections that could lead to internship opportunities.
 
-    Company details:
+    Resume details: {resume_content}
+
+    Company information:
     - Name: {company.get('name')}
     - Description: {company.get('description')}
     - Industry: {company.get('industry')}
     - Location: {company.get('location')}
 
-    Additional points to include: {additional_points}
+    Write a personalized, genuine email to founders at {company.get('name')} that accomplishes the following:
+
+    1. Show genuine interest in their company by mentioning something specific you admire about their product, recent news, or company mission (reference their website if available)
+    2. Briefly highlight 1-2 relevant skills/experiences from your background that specifically align with their company needs
+    3. Demonstrate how you could add value (be specific about a problem you could help solve)
+    4. Include a clear, low-commitment call to action (LinkedIn connection, brief reply, or 15-minute call)
+    5. Acknowledge they may not be actively hiring, but express interest in building a relationship anyway
+    6. Keep the tone warm yet professional, enthusiastic but not desperate
+
+    Additional context to incorporate: {additional_points}
+
+    DO NOT directly ask for a job or internship in the first email. Instead, focus on establishing a connection and offering value.
 
     Format your response as a JSON object with two fields: "subject" and "body".
 
-    Example:
-    {{
-      "subject": "Interest in Opportunities at {company.get('name')}",
-      "body": "Dear Hiring Manager,\\n\\nI am writing to express my interest in potential job opportunities at {company.get('name')}. With my background and skills detailed in my resume, I believe I can contribute effectively to your team.\\n\\nLooking forward to connecting.\\n\\nBest regards,\\nGokhulnath Thirumaran"
-    }}
+    Examples of effective subject lines:
+    - "Fellow [Industry] Enthusiast Interested in {company.get('name')}'s Innovative Work"
+    - "UIC Master's Student with [Specific Skill] Hoping to Connect"
+    - "Quick Question About {company.get('name')}'s Approach to [Relevant Challenge]"
+    - "Impressed by {company.get('name')}'s [Recent Achievement] - Would Love to Connect"
 
-    The email should be professional and concise.
+    Examples of effective email openings:
+    - "I've been following {company.get('name')}'s work on [specific project/product] and was particularly impressed by [specific feature/achievement]."
+    - "Your recent [blog post/interview/product launch] about [topic] resonated with me, especially when you mentioned [specific point]."
+    - "As someone passionate about [relevant field], I've admired how {company.get('name')} has been pioneering [specific approach/solution]."
+
+    Examples of effective calls to action:
+    - "I'd love to connect on LinkedIn [include profile link] - I regularly share insights about [relevant topic] that might interest you."
+    - "Even if you're not currently hiring, I'd appreciate a quick 15-minute call to learn more about your work and share some ideas that might be valuable."
+    - "I'll be attending [relevant upcoming event] - would you or someone from your team be there as well? It would be great to connect in person."
+    - "All good if you're not hiring at the moment - I'd still love to connect and perhaps you could point me towards someone in your network who might benefit from my skills."
+
+    Examples of value propositions:
+    - "During my recent project at [organization], I developed a [specific solution] that improved [specific metric] by [result]. I see {company.get('name')} facing similar challenges with [issue], and I'd be excited to apply this approach to help solve it."
+    - "My research at UIC focuses on [specific area], which aligns perfectly with your company's work on [related area]. I've actually developed [specific approach/tool] that could help address your current challenge with [specific issue mentioned on their website/social media]."
+    - "I noticed from your job board that you value [specific skill/experience]. During my time at [previous role], I specialized in this area and [specific achievement/result]."
+
+    Keep the entire email concise (350-500 words maximum) and make it feel personal, not templated. Do not hallucinate out of this scope, please refer the resume details for all details and provide details from that context only.
+    Do not leave placeholders in the email rather fill the information.
+    
+    Gokhulnath Thirumaran
+    +1 (312) 825-6933
+    linkedin.com/in/gokhulnath-thirumaran
+    gokhulnaththirumaran.com
+
+    Example output format:
+    {{
+    "subject": "Master's Student & Founding Engineer Looking to Connect with YC Founders",
+    "body": "Dear Founder,\n\nMy name is Gokhulnath Thirumaran, a Computer Science Master's student at the University of Illinois Chicago with a passion for building innovative technology from scratch. I've been following your journey since your company went through Y Combinator, and I'm impressed by what you've built.\n\nSince my freshman year of undergrad in 2019, I've lived by a simple philosophy: say yes to opportunities even when I don't have all the answers, then figure it out on the fly. This approach has led me to complete 20+ projects across various frameworks and technologies, starting when I barely knew how to code.\n\nAt Chargebee (a fintech unicorn), I served as a founding engineer for two internal startup microservices, building Atomic Pricing completely from scratch. I specifically chose these roles over established teams because I'm energized by creating something new rather than maintaining what already works.\n\nI'm reaching out because I believe I could bring value to [Company Name] through an internship opportunity. I understand early-stage startups often need people who can wear multiple hats and learn quickly - skills I've demonstrated throughout my career.\n\nAll good if you're not hiring at the moment! I'd still value connecting on LinkedIn (linkedin.com/in/gokhulnath-thirumaran) or even just a quick reply to say hi. If you have a few minutes, I'd also appreciate if you could check out my portfolio at gokhulnaththirumaran.com.\n\nAnd if you know other founders in your network who might be looking for someone with my builder mindset, I'd be grateful for an introduction.\n\nThank you for your time,\n\nGokhulnath Thirumaran\n+1 (312) 825-6933\ngokhulnaththirumaran.com"
+    }}
     """
 
     try:
         # Call Ollama to generate the email
         response = ollama.generate(
-            model='llama3.1:latest',
+            model='gemma3:4b',
             prompt=prompt
         )
 

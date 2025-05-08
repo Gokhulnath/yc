@@ -175,9 +175,9 @@
                             <button class="btn btn-sm btn-secondary" id="copyAllEmail">
                                 <i class="bi bi-clipboard"></i> Copy All
                             </button>
-                            <button class="btn btn-sm btn-secondary" id="copyAllEmailsBtn">
-                                <i class="bi bi-clipboard"></i> Copy Email
-                            </button>
+<!--                            <button class="btn btn-sm btn-secondary" id="copyAllEmailsBtn">-->
+<!--                                <i class="bi bi-clipboard"></i> Copy Email-->
+<!--                            </button>-->
                         </div>
                     </div>
                 </div>
@@ -191,6 +191,9 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="generateEmail">Generate</button>
+                <button class="btn btn-sm btn-secondary" id="copyAllEmailsBtn">
+                                <i class="bi bi-clipboard"></i> Copy Email
+                            </button>
             </div>
         </div>
     </div>
@@ -222,7 +225,9 @@
             let html = `
                 <div class="row mb-4">
                     <div class="col-md-12">
-                        <a href="/" class="btn btn-outline-secondary mb-3">&laquo; Back to Companies</a>
+                       <a href="/?search={{ request.args.get('search', '') }}&batch_id={{ request.args.get('batch_id', '') }}&industry_id={{ request.args.get('industry_id', '') }}&todo_tag={{ request.args.get('todo_tag', '') }}&worth={{ request.args.get('worth', '') }}&page={{ request.args.get('page', 1) }}">
+  Back to Companies
+</a>
                         <div class="d-flex align-items-center mb-3">
                             <img src="${companyData.logo || '/static/placeholder.png'}" alt="${companyData.company_name}" class="me-3" style="width: 80px; height: 80px; object-fit: contain;">
                             <div>
@@ -791,7 +796,7 @@ function openLinkedinLinks() {
     const requestText = document.getElementById('linkedinRequestText').textContent;
     navigator.clipboard.writeText(requestText)
         .then(() => {
-            alert('LinkedIn request copied to clipboard!');
+            // alert('LinkedIn request copied to clipboard!');
         })
         .catch(err => {
             console.error('Failed to copy text: ', err);
@@ -858,7 +863,7 @@ function copyEmailSubject() {
     const subject = document.getElementById('emailSubject').textContent;
     navigator.clipboard.writeText(subject)
         .then(() => {
-            alert('Email subject copied to clipboard!');
+            // alert('Email subject copied to clipboard!');
         })
         .catch(err => {
             console.error('Failed to copy text: ', err);
@@ -870,7 +875,7 @@ function copyEmailBody() {
     const body = document.getElementById('emailBody').innerText;
     navigator.clipboard.writeText(body)
         .then(() => {
-            alert('Email body copied to clipboard!');
+            // alert('Email body copied to clipboard!');
         })
         .catch(err => {
             console.error('Failed to copy text: ', err);
@@ -885,7 +890,7 @@ function copyAllEmail() {
 
     navigator.clipboard.writeText(fullEmail)
         .then(() => {
-            alert('Full email copied to clipboard!');
+            // alert('Full email copied to clipboard!');
         })
         .catch(err => {
             console.error('Failed to copy text: ', err);
@@ -917,7 +922,7 @@ function copyAllEmails() {
     // Copy to clipboard
     navigator.clipboard.writeText(emailText)
         .then(() => {
-            alert(`${allEmails.length} email(s) copied to clipboard!`);
+            // alert(`${allEmails.length} email(s) copied to clipboard!`);
         })
         .catch(err => {
             console.error('Failed to copy emails: ', err);
