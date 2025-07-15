@@ -1,0 +1,866 @@
+[
+    {
+        "link": "https://www.linkedin.com/in/haokun-qin",
+        "name": "Haokun Qin",
+        "bio": "Co-Founder @ Gale (YC W25)",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Co-Founder at Gale (YCW25)",
+        "person_details": {
+            "id": "d1cda131-514b-4956-9879-7f5292dcbabd",
+            "email": "2025-04-18 12:37:43.673949",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/b4d879e54fc4f7ad192906cf1b7d462aa4f207b9.png",
+            "description": "AI Powered Immigration Law Firm",
+            "domain": "San Francisco, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/aishwarya-srinivasan",
+        "name": "Aishwarya Srinivasan",
+        "bio": "AI@Fireworks AI | Global Speaker(90+ sessions) |\n                  EB1-A Recipient | 540k+ Followers| LinkedIn Top Voice |\n                  Author- What's Your Worth? | Responsible AI Advisor | Angel\n                  Investor | Ex-Google, Microsoft, IBM",
+        "location": "San Francisco Bay Area",
+        "other_info": "Current: Investor at Lumen Orbit (YCS24)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/filipkozera",
+        "name": "Filip Kozera",
+        "bio": "ceo @ wordware | yc s24 | ml @ cambridge",
+        "location": "San Francisco, CA",
+        "other_info": "Current: founder and ceo at Wordware (YCS24)",
+        "person_details": {
+            "id": "96a746c8-f802-43f9-aeb9-c80565639530",
+            "email": "2025-04-18 12:26:48.900325",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/4c770777f9cd85b3f3274575fc6698227327bddb.png",
+            "description": "IDE to develop, iterate and deploy AI Agents",
+            "domain": "San Francisco, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/michaelmoyo",
+        "name": "Michael Moyo",
+        "bio": "CEO, Ocular AI (YC W24) | Data Engine for Multimodal\n                  AI | Ex-Microsoft",
+        "location": "San Francisco, CA",
+        "other_info": "Current: CEO & Co-Founder at Ocular AI (YCW24)",
+        "person_details": {
+            "id": "624b5db8-25fe-4b0b-acb4-13b35feb47d6",
+            "email": "2025-04-18 12:50:13.740645",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/2e20f659338993dfe61925632a05952fe44797ed.png",
+            "description": "AI-Native Data Engine for LLMs, Computer Vision, & Enterprise AI",
+            "domain": "San Francisco, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/danielahmadizadeh",
+        "name": "Daniel Ahmadizadeh",
+        "bio": "2x YC CEO | Crustdata | Start With One",
+        "location": "Brooklyn, NY",
+        "other_info": "Current: Growth - Realtime People and Company Data via\n                APIs at Crustdata (YCF24)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/abhishek-jain9925",
+        "name": "AJ Jain",
+        "bio": "CEO at Broccoli - AI voice agents for home service\n                  businesses (we're hiring!)",
+        "location": "San Francisco, CA",
+        "other_info": "Past: Co-Founder and CEO at Telematica (YCW22)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/alandyc8888",
+        "name": "YC Deng",
+        "bio": "3 Startup Sold. 100% Exit.",
+        "location": "United States",
+        "other_info": null,
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/choudharyrishi",
+        "name": "Rishi Choudhary",
+        "bio": "CEO at Kastle (YC S24), ex-Redfin",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Co-Founder and CEO at Kastle (YCS24)",
+        "person_details": {
+            "id": "5fe6f1b0-33be-4961-8df7-c888ce464962",
+            "email": "2025-04-18 12:40:12.837587",
+            "linkedin": "https://x.com/therishic"
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/5599d6ea2250a3e737886dc9c0347fc88fcd2abb.png",
+            "description": "AI agents for mortgage servicing",
+            "domain": null
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/hugo-z-21197a122",
+        "name": "Hugo Z.",
+        "bio": null,
+        "location": "Berkeley, CA",
+        "other_info": "Current: Founder, CTO at Rankai (Backed byYC)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/rohan-d",
+        "name": "Rohan D.",
+        "bio": "Co-Founder at Decipher AI (YC W24) | Prev. Staff eng\n                  at Google",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Co-Founder at Decipher AI (YCW24)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/taehnkim",
+        "name": "Tae Hoon Kim",
+        "bio": "Co-Founder & CTO at Spark (YC W24)",
+        "location": "United States",
+        "other_info": null,
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/6saylem-phillips23",
+        "name": "Saylem Phillips",
+        "bio": "Director of Sales | Sameday.ai (YC W23)",
+        "location": "Pleasant Grove, UT",
+        "other_info": "Current: Director of Sales at Sameday (YCW23)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/elianhaddock",
+        "name": "Elian Haddock",
+        "bio": "Co-Founder @ Airgoods (YC S23)",
+        "location": "New York City Metropolitan Area",
+        "other_info": "Current: Co-Founder & COO at Airgoods (YCS23)",
+        "person_details": {
+            "id": "d8d5087b-14da-40fd-ab64-5f9702aaea35",
+            "email": "2025-04-18 12:42:50.068278",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/d261d8dfa76354809d8e5792b2d21ef5d258f8d5.png",
+            "description": "Wholesale marketplace for food & beverage",
+            "domain": "New York, NY, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/adam-pratt-73a4aa103",
+        "name": "Adam Pratt",
+        "bio": "Co-Founder | CTO @ Henry (YC S24)",
+        "location": "New York, NY",
+        "other_info": "Current: CTO & Co-Founder at Henry AI (YCS24)",
+        "person_details": {
+            "id": "d9d05ed4-937c-4b5b-bf0b-5438f24ef6c1",
+            "email": "2025-04-18 12:57:24.333748",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/0d265b62e9a71a10a393d1dd6dc5f7e7aee9d789.png",
+            "description": "Automating Deal Decks for Commercial Real Estate Brokers",
+            "domain": "New York, NY, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/matthew-koen-4a090610b",
+        "name": "Matthew Koen",
+        "bio": "Head of Engineering @ Brainbase",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Head of Engineering at Brainbase (YCW24)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/dimilias",
+        "name": "Dimitrios Ilias",
+        "bio": "🛠️ Co-Founder & CTO @ Intryc (YC S24) | ex Meta,\n                  Revolut, Amazon | UCL",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Co-Founder & CTO at Intryc (YCS24)",
+        "person_details": {
+            "id": "ea0734e7-110b-4ffc-8b95-4583856b69e7",
+            "email": "2025-04-18 12:43:22.549693",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/c7ba643e872dfb236016ba560ace56c12e3baf83.png",
+            "description": "Intryc uses AI to automate quality assurance for customer support",
+            "domain": "San Francisco, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/guysnir",
+        "name": "Guy Snir",
+        "bio": "Cofounder at Nest Genomics (YC W22) - We're Hiring!",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Co-Founder & COO at Nest Genomics (YCW22)",
+        "person_details": {
+            "id": "57bf9e47-d6ee-43e9-8e4b-6b2e688e8fd5",
+            "email": "2025-04-18 12:34:45.186722",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/c965d20fc0bacd98d8b38c9742848bdb11b05841.png",
+            "description": "Software to launch and integrate genetics into clinical care",
+            "domain": "New York, NY, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/williamwang77",
+        "name": "William Wang 👨‍🌾",
+        "bio": "Co-Founder @ Centralize (YC W24) | Multithread every\n                  deal and unlock 7-8 figures of warm pipeline",
+        "location": "New York, NY",
+        "other_info": "Current: Co-Founder at Centralize (YCW24)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/jon-obryan",
+        "name": "Jon O'Bryan",
+        "bio": "CEO @Atlas | Building the best AI support tool for\n                  high-growth teams",
+        "location": "Palo Alto, CA",
+        "other_info": "Current: CEO & Co-founder at Atlas (YCW22)",
+        "person_details": {
+            "id": "b62b9f61-3f3a-495f-834b-3e045460ac74",
+            "email": "2025-04-18 12:44:53.918941",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/b037e35a133963bb97d49605d21978ac44ac4f83.png",
+            "description": "Modern customer support platform replacement for Intercom and Zendesk",
+            "domain": "San Francisco, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/arvindveluvali",
+        "name": "Arvind Veluvali",
+        "bio": "CEO @ Fresco (YC F24) | AI for Construction",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Co-Founder and CEO at Fresco (YCF24)",
+        "person_details": {
+            "id": "942a6683-c5d8-4737-a991-db3f73d44b92",
+            "email": "2025-04-18 12:27:23.059166",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/e1fb691819d2f0da01fceb80f8f4288c7f863b60.png",
+            "description": "AI copilot for construction superintendents",
+            "domain": "San Francisco, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/parikhrohan",
+        "name": "Rohan Parikh, CFA",
+        "bio": "Co-Founder at Keye (YC F24) | Wharton MBA",
+        "location": "New York City Metropolitan Area",
+        "other_info": "Current: Co-Founder, CEO at Keye (YCF24)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/bansals",
+        "name": "Vipul Bansal",
+        "bio": "CTO at CloudEagle (YC W22)",
+        "location": "San Francisco Bay Area",
+        "other_info": null,
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/seanhunterbrooks",
+        "name": "Hunter Brooks",
+        "bio": "Cofounder & CEO, ellipsis.dev (YC W24)",
+        "location": "New York City Metropolitan Area",
+        "other_info": "Current: Co-Founder at Ellipsis (YCW24)",
+        "person_details": {
+            "id": "5f7a6794-e2cd-40cb-b453-061b405bded6",
+            "email": "2025-04-18 12:28:03.447640",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/825caa6d8502745ed1854595552f4f7f1091bb3e.png",
+            "description": "AI code reviews & bug fixes",
+            "domain": null
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/carlosgotlibmicha",
+        "name": "Carlos Gotlib",
+        "bio": "CEO of TurboCar | Multiple-Time Founder | Sold $10M+\n                  | 1M+ users | Investor in 32 YC companies",
+        "location": "North Miami Beach, FL",
+        "other_info": "Current: Angel Investor at Cero (YCS21)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/leahfrancis1",
+        "name": "Leah Francis",
+        "bio": "Head of Growth @ Mito Health (YC S24)",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Head of Growth at Mito Health (YCS24)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/yuchenghe",
+        "name": "Richard He",
+        "bio": "CEO at Openmart | YC W24 | Forbes 100 Most\n                  Influential Chinese | GTM Platform for Reaching Local\n                  Businesses",
+        "location": "United States",
+        "other_info": "Current: Co-Founder and CEO at Openmart (YCW24)",
+        "person_details": {
+            "id": "11371433-49e3-4b93-ae92-d769b95a5db5",
+            "email": "2025-04-18 12:25:55.207598",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/a841b2f12203d0678ecd110ec8aa1eb131f2681f.png",
+            "description": "GTM platform for reaching local businesses",
+            "domain": "Foster City, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/ctle",
+        "name": "Chris Le",
+        "bio": "Founder at Pax (YC S24)",
+        "location": "United States",
+        "other_info": "Current: Co Founder at Pax AI (YCS24)",
+        "person_details": {
+            "id": "e9f3a321-6998-4a01-8388-0418af63895f",
+            "email": "2025-04-18 12:48:34.347236",
+            "linkedin": "https://x.com/chriiisle"
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/70cdd1fa78c63083ab6a70c63195a46e8f6cad04.png",
+            "description": "AI Broker for Import Tax Refunds",
+            "domain": null
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/adharsh-raveendran",
+        "name": "Adharsh Raveendran",
+        "bio": "Building Syntra (YC S24) | AI Co-Pilot for Clinics\n                  and Surgery Centers",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Founding Team at Syntra (YCS24)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/vince-t-74b660",
+        "name": "Vince T.",
+        "bio": "Former Snowflake Leader - 33rd Employee | Business\n                  Builder | Advisor",
+        "location": "Philadelphia, PA",
+        "other_info": "Past: Advisor at Varos (YCS21)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/alex-mckinney-920b56191",
+        "name": "Alex McKinney",
+        "bio": "Engineering Manager @ Fern",
+        "location": "Brooklyn, NY",
+        "other_info": "Current: Founding Engineer at Fern (YCW23)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/anupom",
+        "name": "Anupom Syam",
+        "bio": "Engineering Leader | AI/ML | Ex-Netflix",
+        "location": "San Francisco Bay Area",
+        "other_info": "Past: Co-founder / CEO at Tackle (YCW21)",
+        "person_details": {
+            "id": "1a9136a5-27c1-478c-a0ab-7a558ed4f610",
+            "email": "2025-04-18 13:00:18.238654",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/b6d69f6925d4c16dd2a677cb6f9d9c595a18a19b.png",
+            "description": "Time tracking on autopilot",
+            "domain": "Mountain View, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/aaron-farr",
+        "name": "Aaron Farr",
+        "bio": "Co-Founder & CEO @ Airgoods",
+        "location": "New York, NY",
+        "other_info": "Current: Co-Founder & CEO at Airgoods (YCS23)",
+        "person_details": {
+            "id": "de5f5bfe-a335-482b-b560-a0d0fc495055",
+            "email": "2025-04-18 12:42:50.068278",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/d261d8dfa76354809d8e5792b2d21ef5d258f8d5.png",
+            "description": "Wholesale marketplace for food & beverage",
+            "domain": "New York, NY, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/0xlingjiekong",
+        "name": "Lingjie (Kimi) Kong",
+        "bio": "Co-founder @ CambioML (YC | HUB71) | ex-DeepMind |\n                  ex-AWS | ex-Microsoft | Stanford AI | Learn Everything |\n                  Hiring",
+        "location": "San Francisco Bay Area",
+        "other_info": "Current: Co-Founder and Researcher at CambioML (YCS23)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/shashij-gupta-671aa614a",
+        "name": "Shashij Gupta",
+        "bio": "Building in Voice AI Testing (YC F24) | ETH Zurich |\n                  IIT Bombay",
+        "location": "San Francisco Bay Area",
+        "other_info": "Current: Co-Founder at Cekura (Formerly VoceraYCF24)",
+        "person_details": {
+            "id": "2c3689a6-35a3-4abe-aeff-124ef05babf3",
+            "email": "2025-04-18 12:55:28.938866",
+            "linkedin": "https://x.com/Shashijgupta"
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/e614d24f652dc1e194f172153c3b7036c9c30b2f.png",
+            "description": "Testing & Observability for AI voice agents",
+            "domain": "San Francisco, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/akhil-climate",
+        "name": "Akhil Gupta",
+        "bio": "Founder @ Fresco (YC F24) | AI for Construction",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Co-Founder at Fresco (YCF24)",
+        "person_details": {
+            "id": "7bfc78c3-aaf6-4670-ad8a-2cf67bc5d18f",
+            "email": "2025-04-18 12:27:23.059166",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/e1fb691819d2f0da01fceb80f8f4288c7f863b60.png",
+            "description": "AI copilot for construction superintendents",
+            "domain": "San Francisco, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/sophiegunter",
+        "name": "Sophie Gunter",
+        "bio": "CEO of SummitMD Dermatology",
+        "location": "Los Angeles, CA",
+        "other_info": "Past: Chief Legal Officer at Respaid (YCS23)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/alyshamalik89",
+        "name": "Alysha Malik",
+        "bio": "Executive Coach & Entrepreneur",
+        "location": "New York, NY",
+        "other_info": "Past: Investor at Abhi (YCS21)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/richard-c-benjamin",
+        "name": "Richard Benjamin",
+        "bio": "Sales Manager at TopLine Pro | YC W21",
+        "location": "Brooklyn, NY",
+        "other_info": "Past: Sales And Marketing Intern at ProPhone |YCW21",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/mdolon",
+        "name": "Monji Dolon",
+        "bio": "Founder and CEO at Measured Health",
+        "location": "New York, NY",
+        "other_info": "Current: Founder and CEO at Measured (YCW21)",
+        "person_details": {
+            "id": "f6c68ac4-0afa-4fae-9e5e-81f6cad4d58f",
+            "email": "2025-04-18 12:45:10.934165",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/cbc687e580ddf0ed25424f22d04d996455ff1995.png",
+            "description": "Telemedicine platform for chronic conditions like obesity",
+            "domain": "New York, NY, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/emilyyuan96",
+        "name": "Emily Yuan",
+        "bio": "Chief Operations Officer @ Corgi",
+        "location": "San Francisco Bay Area",
+        "other_info": "Current: Co-Founder & Chief Operating Officer at\n                Corgi (YCS24)",
+        "person_details": {
+            "id": "a7096532-0e80-4e64-af46-e71c5862fb0a",
+            "email": "2025-04-18 12:48:31.699024",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": "emily@corgi.insure",
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/8f66899a62764756d799d5abc511dc4b46f8c151.png",
+            "description": "Corgi is building an AI insurance company",
+            "domain": "San Francisco, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/chezgaspercic",
+        "name": "Chez Michelle Gaspercic",
+        "bio": "COO | Scaling SaaS through Growth | Operations\n                  Excellence",
+        "location": "Prosper, TX",
+        "other_info": "Past: Head of Revenue Operations at BlueCargo (YCS18)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/felixleezd",
+        "name": "Felix Lee",
+        "bio": "Co-founder, CEO at ADPList | Forbes 30u30 | On a\n                  mission to unlock humanity's potential",
+        "location": "San Francisco, CA",
+        "other_info": "Past: Design Lead at Gotrade (YCS19)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/ryan-s-williams",
+        "name": "Ryan Williams",
+        "bio": "Partner & GM - 3Y Health | Angel Investor &\n                  Advisor",
+        "location": "New York, NY",
+        "other_info": "Current: Investor at Releaf Earth (YCW19)",
+        "person_details": {
+            "id": "c9f2e441-a5ec-4545-9c23-b1a955b2a2dc",
+            "email": "2025-04-18 12:25:17.242553",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/3dd0767f5aa369853ca43c4cfdc902eda25965f9.png",
+            "description": "Career advancement for Black, Latinx & Native American professionals.",
+            "domain": "New York, NY, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/jackie-xu-98983940",
+        "name": "Jackie Xu",
+        "bio": "Engineering Manager",
+        "location": "San Francisco Bay Area",
+        "other_info": "Past: Cofounder & CTO (YCW19) at Landed",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/stenver",
+        "name": "Stenver Jerkku",
+        "bio": "Founder @ Soldera | Empowering renewable producers of\n                  any size to maximize revenue with GOs",
+        "location": "United States",
+        "other_info": null,
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/byronli",
+        "name": "Byron Li",
+        "bio": "Engineering at Applied Intuition",
+        "location": "San Francisco, CA",
+        "other_info": "Past: Product atYCStartup (Stealth)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/kusalwin",
+        "name": "Kusal K.",
+        "bio": "Director of Business Development @ TCS | Army Veteran",
+        "location": "Denver, CO",
+        "other_info": "Past: Sales Representative at HomeRoom (YCW22)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/brandonfoo",
+        "name": "Brandon Foo",
+        "bio": "CEO, Co-founder of Paragon",
+        "location": "Los Angeles, CA",
+        "other_info": "Past: CEO, Co-founder at Polymail (YCS16)",
+        "person_details": {
+            "id": "c2465fb9-a535-4059-84f5-379a355cb0af",
+            "email": "2025-04-18 12:40:55.046920",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/2db694dd7905db37d037821a2fdaf9fa0708a964.png",
+            "description": "Email productivity platform for business.",
+            "domain": "Marina del Rey, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/alanc",
+        "name": "Alan Cordova",
+        "bio": "Accelerating the energy transition",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Advisor at Spark (YCW24)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/gregory-t-knox",
+        "name": "Greg Knox",
+        "bio": "Partnerships @ Beagle",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Founding GTM at Corgi (YCS24)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/tylerbarrfinancial",
+        "name": "Tyler Barr",
+        "bio": "Most Trusted CFO Consulting and Bookkeeping Partner\n                  for Startups and High Growth Companies",
+        "location": "Los Angeles, CA",
+        "other_info": "Current: Financial Controller at Vapi (YCW21)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/jennie-martini-5a715a6b",
+        "name": "Jennie Martini",
+        "bio": "Experienced Leader",
+        "location": "San Marcos, CA",
+        "other_info": "Past: Style Team Leader- Beauty/YCat Target",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/brendan-finch-8658265b",
+        "name": "Brendan Finch",
+        "bio": "Transforming Science Education",
+        "location": "Los Angeles, CA",
+        "other_info": "Current: CEO at RocketLit (YCS16)",
+        "person_details": {
+            "id": "49a8cf0d-4a9d-4435-8000-81f39f7f0854",
+            "email": "2025-04-18 12:51:02.492616",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/2db694dd7905db37d037821a2fdaf9fa0708a964.png",
+            "description": "RocketLit is an adaptive learning and assessment platform.",
+            "domain": "Santa Monica, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/tarush-agarwal-b14851160",
+        "name": "Tarush Agarwal",
+        "bio": "Building Cekura (formerly Vocera) | Y Combinator |\n                  IIT Bombay CS",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Co-Founder & CEO at Cekura (Formerly\n                VoceraYCF24)",
+        "person_details": {
+            "id": "492d440e-60d1-4752-b458-c52739ee9f0d",
+            "email": "2025-04-18 12:55:28.938866",
+            "linkedin": "https://x.com/tarush_agarwal_"
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/e614d24f652dc1e194f172153c3b7036c9c30b2f.png",
+            "description": "Testing & Observability for AI voice agents",
+            "domain": "San Francisco, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/baptistelaffond",
+        "name": "Baptiste Laffond",
+        "bio": "CEO at Lisan Finance / CFO for Tech companies",
+        "location": "Brooklyn, NY",
+        "other_info": "Current: CFO services at BlueCargo (YCS18)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/krishonna-patel-ms-bcba-lba-25493a124",
+        "name": "Krishonna Patel, MS, BCBA,\n                              LBA",
+        "bio": "Board Certified Behavior Analyst",
+        "location": "Birmingham, AL",
+        "other_info": "Current: Clinical Director/Practice Owner at Finni\n                Health (YCW23)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/jkriegsteindmd",
+        "name": "Josh Kriegstein, DMD",
+        "bio": "General Dentist",
+        "location": "San Francisco, CA",
+        "other_info": "Current: General Dentist at Rinse (YCS21)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/dave-gomez",
+        "name": "David Gomez",
+        "bio": "Building and moving",
+        "location": "San Francisco Bay Area",
+        "other_info": "Current: Founding GTM at Corgi (YCS24)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/alexandria-taylor-0ba19127a",
+        "name": "Alexandria Taylor",
+        "bio": "Clinical Practice Founder at Finni Health of Central\n                  Michigan",
+        "location": "Breckenridge, MI",
+        "other_info": "Current: Clinical Practice Founder at Finni Health (YCW23)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/kenneth-lou",
+        "name": "Kenneth Lou",
+        "bio": "Co-Founder & CEO at Mito Health | Helping you\n                  live healthier for longer",
+        "location": "New York, NY",
+        "other_info": "Current: Co-Founder & CEO at Mito Health (YCS24)",
+        "person_details": {
+            "id": "3a6d1128-e5e8-400e-825a-2df4e90b317a",
+            "email": "2025-04-18 12:34:06.373587",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/b7d5b3d9d49d514698e3998f8986079a0af9f826.png",
+            "description": "Bloodwork and personalized insights to help you live longer",
+            "domain": "San Francisco, CA, USA"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/geoffreysee",
+        "name": "Geoffrey See",
+        "bio": "Chief Digital Officer building AI-first orgs |\n                  Certified Psychedelic Assisted Therapist | Y Combinator |\n                  World Economic Forum YGL | Ethereum Foundation Fellow",
+        "location": "United States",
+        "other_info": "Current: Venture Partner at Pioneer Fund - Giving back\n                to the next generation ofYCstartups as a\n                mentor/investor.",
+        "person_details": {
+            "id": "74f38ec6-1a3e-4e41-9279-d30a8e1273fb",
+            "email": "2025-04-18 12:41:52.356189",
+            "linkedin": null
+        },
+        "company_details": {
+            "id": null,
+            "company_name": "https://bookface-images.s3.amazonaws.com/small_logos/e9223cea998383ca05659ccb9f8a005d117395d4.png",
+            "description": "Seamless Fiat Payments for Web3",
+            "domain": "Singapore, Singapore"
+        }
+    },
+    {
+        "link": "https://www.linkedin.com/in/megan-liu",
+        "name": "Megan Liu",
+        "bio": "VC - Startup Support Partner",
+        "location": "San Francisco Bay Area",
+        "other_info": "Past: Co-Founder (YCF3 2016) at CarpStreet,\n                Inc.",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/currant",
+        "name": "David Currant (Tolioupov)",
+        "bio": "Founder & CEO @ MUSTARD, INC - Let local\n                  influencers pack your restaurant",
+        "location": "Austin, TX",
+        "other_info": "Current: Venture Partner at Lobster Capital - Funding\n                the bestYCstartups",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/charlenefernandez",
+        "name": "Charlene F.",
+        "bio": "Operations @ Finni Health (We’re Hiring!) | Scaling\n                  Quality & Operations in Healthtech Startups",
+        "location": "San Francisco, CA",
+        "other_info": "Current: Head of Clinical Operations at Finni Health\n                (YCW23)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/priyankakedia",
+        "name": "Priyanka Kedia, CSCP",
+        "bio": "Fractional COO | Startup Investor | EOS Advocate |\n                  Advisor to Emerging & Established Brands in Food &\n                  Beverage",
+        "location": "Plano, TX",
+        "other_info": "Past: Strategic Advisor at Syncware (YCW22)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/nathantranjr",
+        "name": "Nathan Tran",
+        "bio": "VP of Business Development | Agile Growth | Mortgage\n                  Tech",
+        "location": "Westminster, CA",
+        "other_info": "Past: Business Development - New Territory at Homebase\n                (YCW21)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/cliffweitzman",
+        "name": "Cliff Weitzman",
+        "bio": "Founder CEO @ Speechify AI, we're hiring! 🚀 Above\n                  all, be the person you needed when you were young 🎧",
+        "location": "Miami, FL",
+        "other_info": "Past: Computer Science Instructor at Make School (YC'12)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/ashleymtay",
+        "name": "Ashley Tay",
+        "bio": "Talent Acquisition Specialist",
+        "location": "Manchester, NH",
+        "other_info": "Past: Senior Clinical Recruiter at Finni Health (YCW23)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/oliviaswanwebb",
+        "name": "Olivia Webb",
+        "bio": "Recruiting @ Tennr",
+        "location": "New York, NY",
+        "other_info": "Past: Executive Assistant + Office Manager at Tennr\n                (YCW23)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/saraescoux",
+        "name": "Sara Escobar",
+        "bio": "Employee Experience, Ops, Workplace, and Change\n                  Leader/Advisor - CFM, CCMP - Former Hulu, Honey, Netflix,\n                  Riot; forever Entrepreneur",
+        "location": "Portland, Oregon Metropolitan Area",
+        "other_info": "Past: Investor and Advisor at Café (YCS21)",
+        "person_details": null,
+        "company_details": null
+    },
+    {
+        "link": "https://www.linkedin.com/in/spvfund",
+        "name": "JD M.",
+        "bio": "Private Equity and Board of Directors focus (NVCA /\n                  NACD) - Purpose-driven capital: The power of empathy,\n                  energy, and impact.",
+        "location": "Rancho Santa Fe, CA",
+        "other_info": "Current: SPE Investor at Grain Technology (YCW20)",
+        "person_details": null,
+        "company_details": null
+    }
+]

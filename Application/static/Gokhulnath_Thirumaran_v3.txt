@@ -1,0 +1,248 @@
+Gokhulnath Thirumaran
++1 (312) 825-6933 | gthir@uic.edu | linkedin.com/in/gokhulnath-thirumaran | gokhulnaththirumaran.com
+EDUCATION​
+University of Illinois Chicago​
+​
+​
+​
+​
+Master of Science in Computer Science, CGPA: 4/4​ ​
+​
+​
+Sri Sivasubramaniya Nadar College of Engineering​
+​
+​
+Bachelor of Engineering Computer Science & Engineering, CGPA: 3.4/4 ​
+
+​
+​
+​
+​
+​
+
+​
+
+​
+​
+
+​
+​
+
+​
+
+​
+Chicago, Illinois
+​
+May 2026
+Chennai, India
+​​
+June 2022
+
+SKILLS
+●​ Languages and Tools: Java, Python, C, C++, SQL, JavaScript, HTML, CSS, NodeJS, Git, Android Studio, Raspberry Pi
+●​ Libraries and Frameworks: MERN, Django, SpringBoot, VueJS, Postman, Junit, Selenium, Flask, Next.js, Redux,
+PyTorch, Keras, TensorFlow, OpenCV, PostGres, RESTful APIs, GraphQL, JWT, OAuth, SonarQube, FastApi, LangChain,
+Pydantic, LLM Fine-tuning, Vector DBs, NLP Model Deployment
+●​ Cloud & Devops: AWS, Google Cloud, Firebase, DigitalOcean, Vercel, Heroku, Netlify, Oracle, Hugging face, Docker,
+Terraform, GitLab CI, GitHub Actions, Datadog, Splunk, Git, NPM, Yarn.
+WORK EXPERIENCE​
+​
+​
+​
+Chargebee (A billing SAAS fintech)​
+​
+​
+​
+​
+​
+​
+​
+Chennai, India​
+Software Engineer (Atomic Pricing Team)​ ​
+​
+​
+​ ​
+Dec 2023 – August 2024
+●​ Built a microservice from scratch called Atomic Pricing as a full-stack developer, a no-code microservice using Spring for
+backend API development and Next.js for a responsive frontend, hosted on AWS and Vercel for scalability and performance.
+●​ Implemented RESTful APIs to enable real-time pricing updates and dynamic page generation for SaaS clients.
+●​ Deployed Datadog and Splunk for monitoring and integrated AI into the GitHub CI/CD pipeline to minimize manual
+interaction by automating pull request reviews, adding auto-comments, providing code suggestions, and ensuring continuous
+monitoring and deployment.
+●​ Worked closely with cross-functional teams, including product development, marketing, and client success, to refine and
+optimize the product for market readiness, ensuring alignment with customer needs and business objectives.
+●​ Engaged in customer acquisition, support, and bug report calls, managing the customer feedback funnel through regular email
+communication to address inquiries and ensure continuous product improvement.
+Software Engineer (Embedded Payments Team)​
+​
+​
+​
+​
+August 2022 – Dec 2023
+●​ Integrated services like refunds, onboarding merchants, front and back-end payment dashboards, and ACH integration
+●​ Built a payments statistics dashboard and onboarded a new payment facilitator into payments for the billing product by
+enabling a multi-Payment Facilitator system; implemented an account updater for all payfac
+●​ Reduced failure rate by over 80% by building an AI-based smart routing algorithm which also eliminates pre-predicted
+failures as part of an internal hackathon
+●​ Responsible for full stack development and creating test cases for the features
+Software Engineering Intern​
+​
+​
+​
+​
+​
+​
+​
+January – June 2022
+●​ Implemented an in-house reconciliation application; began developing a refund and email notification system
+Independent Projects (Portfolio)​ ​
+​
+​
+​
+​
+​
+​
+​
+Chennai, India
+Freelance Web and Software Developer​
+​
+​
+​
+​
+​
+​
+November 2020 – Present
+●​ Executed 8 projects on websites and product development for small to large businesses across sectors such as healthcare,
+e-commerce, design, advertisements and marketing, travel, and logistics.
+●​ Developed a variety of websites with tight and complex design constraints, such as a dynamic and no-code-editable website,
+e-commerce web and mobile applications, and portfolio websites for clients based in the UK and US.
+●​ Extensively used and developed expertise in full-stack development: MERN, Spring Boot, Vue.js, React, Next.js, AWS,
+Vercel, DigitalOcean, and VPS deployment in various global locations.
+●​ Implemented error monitoring and later-stage monitoring solutions for seamless product performance and maintenance.
+CONFERENCE PAPER PRESENTATIONS
+●​ Thirumaran, G., Mahendran, G. and Shanckin, S., 2023, Gaussian Processes for Automating Model Selection, 3rd
+International Conference on Signal & Data Processing 2023; VIT Bhopal, November 3-4 2023 (Paper accepted to be
+published by Springer in the conference proceedings)
+●​ Mahendran, G., Thirumaran, G., Ali, S. I., Jadon, V. R., 2023, NAS for Automated ML Deployment on Extreme Edge
+Devices, 3rd International Conference on Signal & Data Processing 2023; VIT Bhopal, November 3-4 2023 (Paper accepted
+to be published by Springer in the conference proceedings)
+●​ Mahendran, G., Thirumaran, G., Srivastava, P., and Riwat, D., 2023, A Computational Analysis of Climate Change
+Sentiment on Social Media, 3rd International Conference on Signal & Data Processing 2023; VIT Bhopal, November 3-4
+2023 (Paper accepted to be published by Springer in the conference proceedings)
+
+RESEARCH EXPERIENCE
+Enhanced modeling of wine preferences using physicochemical properties​ ​
+​
+August 2023 – July 2024
+●​ Developed a poor-dataset prediction model for best chemical proportion prediction using deep learning and machine learning
+methods; collaborated with faculty in VIT University, Chennai and IIT Guwahati
+●​ Developed an enhanced predictive model for wine taste preferences, surpassing benchmarks established in referenced
+research using one shot learning, SVM and multi perceptron neural network
+ACADEMIC PROJECTS
+Tumor size estimation and 3D model viewing using deep learning | TensorFlow, Keras, OpenCV​
+January - August 2022
+●​ Studied overall efficacy and accuracy of using deep learning to estimate tumor size by using DICOM scan images
+●​ Used transfer learning along with VGG CNN model and ResUNet model to detect, segment and map multiple tumors in a
+single brain with 92% accuracy
+Real-time data extraction using OCR | Android Studio, Java, Firebase, Tesseract, ML, JSON, Git ​
+January - July 2021
+●​ Led a team of 3 to develop an Android application to scan drivers’ licenses and convert card information from JSON to API
+format using images of the documents to collect and verify a person’s identity easily
+●​ Used Optical Character Recognition (OCR) to conduct real-time data extraction; currently supported in iOS and Android, can
+be scaled up so it can be used on the web
+Zinger: an in-campus food delivery app | Android Studio, Java, XML, Firebase, Rest API, JSON, Git
+●​ Developed a food delivery and pick-up service mobile app for college and company campus
+
+March - October 2020
+
+Automated attendance system | Deep Learning, TensorFlow, OpenCV, Python​ ​
+​
+January - December 2019
+●​ Designed an attendance system application that automates attendance for students by recognising faces and RFID tags (in
+student ID cards) to note the attendance of students accurately and efficiently, and update the professor’s attendance database
+ENTREPRENEURSHIP
+The Savvy Saints (event-management initiative) | Co-founder​
+​
+​
+​
+​
+●​ Led a team and organized 20+ events, which included college cultural events, talk shows, corporate events, farewells, etc. and
+generated a revenue of USD 50,000 in 2022
+●​ Developing a product to visualize event spaces and conduct virtual tours of venues for customers to review these spaces
+The Scribble Art (early phase) | Co-founder​
+​
+​
+​
+​
+​
+●​ Founded a design company to help creators brand and merchandise clothing, stickers, posters, and prints
+●​ Developed an AI-powered software for customers without design knowledge to create their clothing brands and digital prints
+PROFESSIONAL DEVELOPMENT (COURSES)
+●​ Front-End Web UI Frameworks and ToolsL Bootstrap 4; Data Science Orientation; Programming Foundations with
+JavaScript; HTML and CSS (Coursera)​ ​
+​
+​
+​
+​
+​
+​
+​
+●​ Programming in C/C++ (FIIT); Programming in JAVA and Python for Data Science (NIIT Academic Council)​
+
+2020
+2018
+
+EXTRACURRICULAR ACTIVITIES
+Lakshya (Entrepreneurship Development Cell of Sri Subramaniya Nadar College)
+Organizer (2019-2021), Core member (2021-2022) ​ ​
+​
+​
+​
+​
+​
+June 2019 –June 2022
+●​ Conducted 20+ events, including college-wide events that included management of 200+ volunteers, such as Udhaan (market
+simulation for products and bids) and SYCon (a TedX-style talk show) with CEOs, film actors, and entrepreneurs
+●​ Led a team to develop a ticketing application with features (admin dashboard, referrals, buying and selling tickets, transfer
+tickets, entry and exit validation, etc.) for our college, with 100% uptime; achieved sales of 1,000+ tickets within a month
+Member of Photography Club, Android and Web Development Club​ ​
+​
+​
+July 2018 – June 2021
+VOLUNTEERING
+Lure of Life​
+​
+​
+​
+​
+​ ​
+​
+Chennai, India​
+Co-founder​
+​
+​
+​
+​
+​
+July 2020 – present
+●​ Led a team of 15 volunteers in teaching communication skills to 20 homeless and slum-dwelling children across 5
+neighborhoods through “The Bridge Project”
+Ullas Trust​
+​
+​
+​
+​ ​
+Thiruporur, India​
+NSS student volunteer ​ ​
+​
+​
+​
+​
+​
+​
+​
+November 2018 – June 2022
+●​ Educated government school students on soft skills like communication, personality development, teamwork, leadership and
+management skills; taught multiple classes at a government-run higher secondary school for girls in Thiruporur, Tamil Nadu
+
+
